@@ -19,3 +19,7 @@
     2. Subitem 2
 
 `inline code`
+
+```
+code block
+```
