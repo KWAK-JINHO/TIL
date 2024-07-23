@@ -5,7 +5,7 @@
 gradle은 Groovy 기반의 오픈소스 빌드 도구 이다.
 
 ### 프로젝트 구성
-![]()
+![](https://github.com/KWAK-JINHO/TIL/blob/main/Tools/img/gradle_recognition_issue2.png)
 - .gradle - gradle 버전 별 엔진 및 설정 파일
 - .idea - 에디터 관련 파일들
 - gradle/wrapper - 사용자가 Gradle을 설치하지 않았어도 Gradle tasks를 실행할 수 있도록 도와준다.
