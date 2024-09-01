@@ -4,19 +4,19 @@
 - 유닛 테스트를 작성하고 실행하기 위한 프레임워크
 - 주요 기능
     1. 테스트 클래스와 테스트 메서드
-    - 테스트 클래스는 일반적으로 특정 클래스 또는 모듈을 테스트하는 데 사용됩니다.
-    - 각 테스트 메서드는 개별 기능이나 동작을 검증합니다.
-    - 테스트 메서드는 @Test 어노테이션으로 표시됩니다.
+       - 테스트 클래스는 일반적으로 특정 클래스 또는 모듈을 테스트하는 데 사용됩니다.
+       - 각 테스트 메서드는 개별 기능이나 동작을 검증합니다.
+       - 테스트 메서드는 @Test 어노테이션으로 표시됩니다.
     2. 어노테이션
-    - @Test: 메서드를 테스트 메서드로 지정합니다.
-    - @BeforeEach와 @AfterEach: 각 테스트 메서드가 실행되기 전후에 실행되는 메서드를 지정합니다.
-    - @BeforeAll과 @AfterAll: 모든 테스트 메서드가 실행되기 전후에 한 번씩 실행되는 메서드를 지정합니다.
-    - @Disabled: 특정 테스트 메서드를 비활성화합니다.
+       - @Test: 메서드를 테스트 메서드로 지정합니다.
+       - @BeforeEach와 @AfterEach: 각 테스트 메서드가 실행되기 전후에 실행되는 메서드를 지정합니다.
+       - @BeforeAll과 @AfterAll: 모든 테스트 메서드가 실행되기 전후에 한 번씩 실행되는 메서드를 지정합니다.
+       - @Disabled: 특정 테스트 메서드를 비활성화합니다.
     3. Assertions
-    - 다양한 assertion 메서드를 제공하여 테스트 결과를 검증합니다.
-    - 예: assertEquals(expected, actual), assertTrue(condition), assertThrows(expectedType, executable) 등.
+       - 다양한 assertion 메서드를 제공하여 테스트 결과를 검증합니다.
+       - 예: assertEquals(expected, actual), assertTrue(condition), assertThrows(expectedType, executable) 등.
     4. 테스트 실행
-    - IDE에서 직접 실행하거나, 빌드 도구(예: Maven, Gradle)를 통해 실행할 수 있다.
+       - IDE에서 직접 실행하거나, 빌드 도구(예: Maven, Gradle)를 통해 실행할 수 있다.
 - 장점
     1. 테스트를 자동화하여 반복적이고 일관된 테스트를 보장할 수 있다.
     2. 자동화된 테스트는 버그를 조기에 발견하고 수정하는 데 도움이 되어 전체 개발 속도를 향상시킨다.
