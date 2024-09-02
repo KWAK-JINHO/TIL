@@ -2,30 +2,42 @@
 
 > 출처 : 점프 투 자바, 나도코딩  자바 무료 강의 2시간 완성
   
+### 문자열 비교
+```
+String s1 = "Java"; // 이렇게 선언하면 메모리 한공간에 Java가 올라간다
+String s2 = "Java"; // 하나 더 쓰면 위에 쓴것과 같은 메모리 공간을 공유한다.
+하지만
+String s1 = new String("Java");
+String s2 = new String("Java");
+```
+- 이렇게 new키워드를 사용해 문자열을 생성한다면, 새로운 객체가 힙 메모리에 생성된다. 때문에 동일한 문자열 리터럴이라도 서로 다른 메모리 공간을 차지하게 된다.
+- 비교할때는 == 이 아닌 equals로 비교
+
 ### 예시
-    ```
-    public class Sample {
-        public static void main(String[] args) {
-            System.out.println("Hello java");
-        }
+```
+public class Sample {
+    public static void main(String[] args) {
+        System.out.println("Hello java");
     }
-    ```
+}
+```
 
 ### 클래스 블록
-    ```
-    public class 클래스명 {
-    }
-    ```
+```
+public class 클래스명 {
+}
+```
 - 자바 코드의 가장 바깥쪽 영역. 여러 메서드 블록을 포함
 - 클래스명 앞에 public 키워드를 추가하면 그 클래스의 이름은 파일명과 동일해야 한다.
 
 ### 메서드 블록
-    ```
-    [public|private|protected] [static] (리턴자료형|void) 메서드명1(입력자료형 매개변수, ...) {
-            명령문(statement);
-            ...
-    }
-    ```
+```
+[public|private|protected] [static] (리턴자료형|void) 메서드명1(입력자료형 매개변수, ...) {
+        명령문(statement);
+        ...
+}
+```
+
 #### public, private, protected 는 메서드의 **접근 제어자**이다.
 - private : 해당 클래스 내에서만
 - public : 모든 클래스에서
@@ -33,17 +45,17 @@
 - protected : 같은 패키지 내에서, 다른 패키지인 경우 자식 클래스에서만 접근 가능
 
 #### static 이 붙으면 static 메서드가 된다.
-    ```
-    class Counter  {
-        static int count = 0;
-            ...
-        }
-    
-        public static int getCount() {
-            return count;
-        }
+```
+class Counter  {
+    static int count = 0;
+        ...
     }
-    ```
+
+    public static int getCount() {
+        return count;
+    }
+}
+```
 - Counter 클래스에 getCount() 라는 스태틱 메서드를 추가했다. 메서드 앞에 static 키워드를 붙이면 Counter.getCount()처럼 클래스를 통해 메서드를 직접 호출할 수 있다.
 
 - void는 메서드가 실행된 후 리턴되는 값의 자료형이다. 리턴값이 있으면 리턴 자료형을 적고 리턴값이 없다면 void
@@ -68,6 +80,7 @@ int[] moreNumbers = new int[5]; // 크기가 5인 배열 생성
 moreNumbers[0] = 1;
 moreNumbers[1] = 2;
 ```
+
 2. 자바스크립트
    - 동적 배열: 배열의 크기가 동적으로 조절 가능하다. 배열에 요소를 추가, 제거할 수 있다.
    - 형식 : 다양한 타입의 요소를 가질 수 있다.
@@ -332,3 +345,256 @@ public static void main(String[] args){
 - 부모클래스에 접근하기 위해서 사용
 - super.부모 클래스 변수;
 - supre.부모 클래스 메소드();
+
+### 참조
+- 객체의 메모리 주소를 가리킴
+- 기본 자료형 : 실제 값 저장 // int, float, double, long, boolean...
+- 참조 자료형 : 값이 저장된 메모리 주소를 저장 // String, Person, Student...
+```
+int a = 10;
+int b = 20;
+a = b; // b의 값을 a에 복사(a값이 수정됨)
+
+String s1 = "가";
+String s2 = "나";
+s1 = s2; // s2가 가리키고 있던 값을 s1 도 가리키게 되면서 s1 도 "나"가 된다.
+```
+
+### Final
+- 변경할 수 없게 쓰는 키워드
+- 변수에 사용 : final String name = "철수"; // name은 변경할 수 없게 된다. 값을 무조건 할당 해주어야 한다.
+- 메소드에 사용 : public final void introduce(){} // introduce 라고 하는 메소드를 새롭게 정의 불가능. 자식 클래스에서 오버라이딩 할 수 없게 된다
+
+### 열거형
+```commandline
+enum Gender{
+   Male,
+   FeMale
+}
+
+class Person{
+   Gender gender; // 변수명
+   public void setGender(Gender gender){
+      this.gender = gender; // 인스턴스 변수
+   }
+}
+
+public static void main(String[] args){
+   Person person = new Person();
+   Person.setGender(Gender.MALE); // MALE, FEMALE / switch-case 에서 유용하게 쓰임
+   
+   switch(person.gender){
+      case MALE: System.out.pritln("남자"); break;
+      case FEMALE: System.out.println("여자"); break;
+   }
+}
+```
+
+### 추상 클래스
+- 아직 완성되지 않은 클래스
+- 키워드: abstract
+```commandline
+abstract class Shape{
+  abstract double calculateArea(); // 도형의 면적을 결정하는 메소드 선언, 추상클래스로서 미완성이다
+}
+class Square extends Shape{ // 정사각형을 만들기 위한 클래스 선언
+  private double s;
+  public Square(double s);{ // s값을 생성자를 통해 전달 받는다
+    this.s = s;
+  }
+  double calcualtArea(){
+    return s * s; // 면적 계산
+  }
+}
+```
+
+### 인터페이스
+- 클래스를 작성할때 기본이 되는 뼈대
+```commandline
+//추상클래스
+abstract class Shape{
+  abstract double calculateArea();
+}
+
+//인터페이스
+interface Shape{
+  double calculateArea(); // interface 라고 하는 인터페이스를 구현하는 클래스에서는 calcualteArea 메소드를 정의해줘야한다.
+}
+
+//구현
+class Square implements Shape{ //Shape 인터페이스 안에 메소드를 여기서 완성시켜주면된다.
+  private double s;
+  public Square(double s);{
+    this.s = s;
+  }
+  double calcualtArea(){
+    return s * s;
+  }
+}
+```
+
+### 제네릭스
+- 다양한 형태의 데이터를 다룰 수 있게 해주는 것. 코드의 재사용성을 높이고 타입 안정성 확보 가능
+```commandline
+T 변수명
+public static void main(String[] args){
+  int intValue = 3;
+  double doubleValue = 3.14;
+  String stringValue = "안녕";
+  // 각각의 메소드 내에서 출력하고 싶을때
+  // 서로 다른 전달값을 받아서 메소드 오버로딩해서 만든다.
+  prtinValue(intValue);
+  printValue(doubleValue);
+  printValue(stringValue);
+  
+  public static void printValue(int value){
+    System.out.println(value);
+  }
+  public static void printValue(double value){
+    System.out.println(value);
+  }
+  public static void printValue(string value){
+    System.out.println(value);
+  }
+  //위의 코드에서 아래처럼 쓸 수 있음
+  public static <T> void printValue(T value){
+    System.out.println(value);
+  }
+}
+```
+
+### 제네릭 클래스
+- 제네릭 기반 클래스 다양한 데이터 유형을 처리할 수 있게 설계된 클래스
+```commandline
+// 사용법
+class 클래스명<T>{
+}
+
+class BoxInteger{
+  int data;
+  public void setData(int data){ //setter를 통해서 전달 받은값을 인스턴스 변수에 설정
+    this.data = data;
+  }
+}
+class boxString{
+  int data;
+  public void setData(String data){ //위와 다르게 String 값
+    this.data = data;
+  }
+}
+
+public static void main(Stinrg[] args){
+  BoxInteger iBox = new BoxInteger();
+  iBox.setData(3); //정수 담기
+  
+  BoxString sBox = new BoxString();
+  sBox.setData("안녕"); //문자열 담기
+}
+// 위에 두 클래스가 하는 동작이 똑같을때 제네릭 클래스로 만들 수 있다.
+class Box<T>{
+  T data;
+  public void setData(T data){ //위와 다르게 String 값
+    this.data = data;
+  }
+} // 이 박스는 모든 데이터를 담을 수 있는 Box 클래스
+// 사용법
+public static void main(Stinrg[] args){
+  Box<Integer> iBox = new Box<>(); //클래스 뒤에 어떤 데이터 담을지 정해준다.
+  iBox.setData(3); //정수 담기
+  
+  Box<String> sBox = new Box<>();
+  sBox.setData("안녕"); //문자열 담기
+}
+```
+### Wrapper 클래스
+- 기본 자료형 + 추가 기능 제공 클래스
+- Integer -> int
+- Double -> double
+- Character -> char
+```commandline
+public static void main(String[] args){
+   int = 1;
+   double d = 1.0;
+   char c = 'a';
+}
+// Wrapper 클래스 사용
+public static void main(String[] args){
+   Integer = 1;
+   Double d = 1.0;
+   Character c = 'a';
+   
+   System.out.println(i.intValue());
+   System.out.println(d.intValue()); // double 같은 경우는 정수로 변환해서 출력하고 싶은경우 이렇게 쓴다.
+   System.out.println(c.charValue());
+}
+```
+
+### 익명 클래스
+- 한번만 사용되는 이름 없는 클래스
+
+#### 예시
+```commandline
+class Person{
+ public void introduce(){
+   System.out.println("사람입니다");
+ }
+}
+// 메인 메서드에서의 inroduce() 사용
+public stoatic void main(String[] args){
+  Person person = new Person();
+  person.introduce(); // 사람입니다
+}
+// 아래는 익명 클래스 사용시 (클래스가 선언되어 있어야 확장시켜서 사용 가능 없으면 안됨)
+public stoatic void main(String[] args){
+  Person person = new Person() {
+     @Override // 어노테이션
+     public void introduce(){
+       System.out.println("익명입니다");
+     }
+  };
+  person.introduce(); // 익명입니다
+}
+```
+
+### 람다식
+- 간결한 형태의 코드 묶음. 메소드의 동작을 간단하게 표현하기 위해서 사용
+
+#### 예시
+- (전달값1, 전달값2, ...) -> {코드}
+```commandline
+// 두개의 수를 받아서 더해주는 add 메서드
+public int add(int x, int y) {
+  return x + y;
+}
+
+// 람다식으로 변경 순서
+// 1. 접근제어자, 반환형, 이름 을 제거 한다.
+// 2. 전달값이 들어가는 괄호와 중괄호 사이에 -> 기호 삽입
+// 3. 자료형 제거
+// 4. 괄호, return 제거
+(x, y) -> x + y // 간소화된 모습
+```
+
+### 함수형 인터페이스
+   - 람다식을 위한 인터페이스
+   - 함수형 인터페이스는 딱 하나의 추상메서드를 가져야 한다는 제약사항이 있음
+
+#### 예시
+```commandline
+@FunctionalInterface
+interface 인터페이스명 {
+  // 하나의 추상메서드
+}
+
+// 사용예시
+@FunctionalInterface
+interface Calculator {
+  int calculate(int x, int y); // 두개의 수를 전달 받아서 어떤 연산결과를 반환해줄 하나의 추상메서드 존재
+}
+// 메인 메서드에서의 활용
+public static void main(String[] args) {
+  Calculator add = (x, y) -> x + y; // 두 수를 더한 결과를 반환하는 람다식, 그러면 람다식이 인터페이스 내의 calcualate라는 메서드와 맵핑이되는것.
+  int result = add.calculate(2, 3); // 두 수를 더하는 동작 수행
+  System.out.println("2 + 3 = " + result);
+}
+```
