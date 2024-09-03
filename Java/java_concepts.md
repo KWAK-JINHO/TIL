@@ -29,6 +29,7 @@ public class 클래스명 {
 ```
 - 자바 코드의 가장 바깥쪽 영역. 여러 메서드 블록을 포함
 - 클래스명 앞에 public 키워드를 추가하면 그 클래스의 이름은 파일명과 동일해야 한다.
+---
 
 ### 메서드 블록
 ```
@@ -57,10 +58,9 @@ class Counter  {
 }
 ```
 - Counter 클래스에 getCount() 라는 스태틱 메서드를 추가했다. 메서드 앞에 static 키워드를 붙이면 Counter.getCount()처럼 클래스를 통해 메서드를 직접 호출할 수 있다.
-
 - void는 메서드가 실행된 후 리턴되는 값의 자료형이다. 리턴값이 있으면 리턴 자료형을 적고 리턴값이 없다면 void
-
 - 입력 자료형 매개변수 와 인수. 위 예시를 보면 args 변수는 String[] 배열 자료형임을 의미
+---
 
 ### Java VS JavaScript
 // 계속 헷갈리는 개념 정리..
@@ -104,7 +104,7 @@ console.log(numbers.length); // 출력: 6
 2. 자바스크립트
     - 키-값 쌍: 키-값으로 데이터를 저장한다. 객체의 속성은 문자열이나 심볼로 정의된 키를 가진다.
     - 동적속성: 동적으로 속성을 추가하거나 제거할 수 있다.
-
+---
 
 ### 인스턴스 생성
 - 객체(인스턴스)를 생성하는 과정은 클래스의 설계와 객체 지향 프로그래밍의 핵심 개념을 이해하는데 중요하다.
@@ -133,6 +133,7 @@ public class Main {
 - objectname : 생성된 객체의 참조를 담을 변수 이름
 - new ClassName() : 클래스의 생성자를 호출하여 객체를 생성한다.
 - 이외에도 '싱글턴 패턴', '팩토리 메서드 패턴' 등 다른 방법도 존재
+---
 
 ### 인스턴스 변수
 - 클래스내에 선언된 변수
@@ -172,6 +173,7 @@ public static void main(String[] args){
    System.out.println(Person.personCount); //10
 }
 ```
+---
 
 ### 인스턴스 메소드
 - 클래스 내에 정의된 메소드
@@ -199,6 +201,7 @@ public static void main(String[] args){
    person.introduce();    // 점(.) 을 통해서 메소드에 접근
 }
 ```
+---
 
 ### 클래스 메소드
 - 클래스 내에  static 으로 정의된 메소드
@@ -216,6 +219,7 @@ public static void main(String[] args){
    Person.printPersonCount(); //
 }
 ```
+---
   
 ### This 
 - 자기자신(보통 클래스 내에서 인스턴스 변수 / 지역변수 구분하기 위해서 사용)
@@ -233,6 +237,7 @@ public static void main(Stinrg[] args){
    Systeom.out.println(person.name); // 철수
 }
 ```
+---
   
 ### 생성자
 - 객체가 생성될때 호출되는 메소드
@@ -254,6 +259,7 @@ public static void main(Stinrg[] args){
    Person person = new person("철수", 20); //위의 클래스에 전달값이 대입이 된다.
 }
 ```
+---
   
 ### Getter
 - 인스턴스 변수의 값 반환
@@ -292,6 +298,7 @@ public static void main(Stinrg[] args){
        System.out.println(person.getAge()); //값 가져오기
 }
 ```
+---
 
 ### 상속
 ```commandline
@@ -299,6 +306,7 @@ class 자식 클래스명 estends 부모 클래스명{
     // 확장할 내용
 }
 ```
+---
 
 ### 메소드 오버라이딩
 - 부모 클래스의 메소드 재정의
@@ -316,6 +324,7 @@ class Student extends Person{
   }
 }
 ```
+---
   
 ### 다형성
 ```commandline
@@ -340,6 +349,7 @@ public static void main(String[] args){
 }
 ```
 - 서로 다른 객체를 만들고 Person 이라는 참조 변수를 통해서 각각의 객체를 참조하게 된다.
+---
 
 ### Super
 - 부모클래스에 접근하기 위해서 사용
@@ -359,6 +369,7 @@ String s1 = "가";
 String s2 = "나";
 s1 = s2; // s2가 가리키고 있던 값을 s1 도 가리키게 되면서 s1 도 "나"가 된다.
 ```
+---
 
 ### Final
 - 변경할 수 없게 쓰는 키워드
@@ -389,6 +400,7 @@ public static void main(String[] args){
    }
 }
 ```
+---
 
 ### 추상 클래스
 - 아직 완성되지 않은 클래스
@@ -407,6 +419,7 @@ class Square extends Shape{ // 정사각형을 만들기 위한 클래스 선언
   }
 }
 ```
+---
 
 ### 인터페이스
 - 클래스를 작성할때 기본이 되는 뼈대
@@ -432,6 +445,7 @@ class Square implements Shape{ //Shape 인터페이스 안에 메소드를 여�
   }
 }
 ```
+---
 
 ### 제네릭스
 - 다양한 형태의 데이터를 다룰 수 있게 해주는 것. 코드의 재사용성을 높이고 타입 안정성 확보 가능
@@ -462,6 +476,7 @@ public static void main(String[] args){
   }
 }
 ```
+---
 
 ### 제네릭 클래스
 - 제네릭 기반 클래스 다양한 데이터 유형을 처리할 수 있게 설계된 클래스
@@ -506,6 +521,8 @@ public static void main(Stinrg[] args){
   sBox.setData("안녕"); //문자열 담기
 }
 ```
+---
+
 ### Wrapper 클래스
 - 기본 자료형 + 추가 기능 제공 클래스
 - Integer -> int
@@ -528,6 +545,7 @@ public static void main(String[] args){
    System.out.println(c.charValue());
 }
 ```
+---
 
 ### 익명 클래스
 - 한번만 사용되는 이름 없는 클래스
@@ -555,6 +573,7 @@ public stoatic void main(String[] args){
   person.introduce(); // 익명입니다
 }
 ```
+---
 
 ### 람다식
 - 간결한 형태의 코드 묶음. 메소드의 동작을 간단하게 표현하기 위해서 사용
@@ -574,6 +593,7 @@ public int add(int x, int y) {
 // 4. 괄호, return 제거
 (x, y) -> x + y // 간소화된 모습
 ```
+---
 
 ### 함수형 인터페이스
    - 람다식을 위한 인터페이스
@@ -598,3 +618,374 @@ public static void main(String[] args) {
   System.out.println("2 + 3 = " + result);
 }
 ```
+---
+
+### 스트림
+- 배열 또는 컬랙션 데이터를 효과적으로 처리
+
+#### 예시
+```commandline
+public static void main(String[] args){
+  List<INteger> numbers = Arrays.asList(1,2,3,4,5);
+  // 위의 정수형 배열에서 특정 데이터만 스트림을 이용해서 데이터를 가공해서 추출
+  numbers.stream() //numbers 라는 리스트로부터 스트림을 얻어온다.
+    .filter(n -> n % 2 == 0) // 짝수만 필터링
+    .map(n -> n * 2) // 각 요소 값을 2배로 변환
+    .forEach(System.out::println); // 결과 출력
+} 
+```
+---
+
+### 예외처리
+- try catch
+```commandline
+try {
+  명령문
+} catch(변수) {
+  예외 처리
+}
+// try 에서 명령문을 실행하다가 어떤 문제가 생기면 catch 영역을 통해서 문제 처리를 해줄 수 있다.
+```
+
+#### 예시
+```commandline
+public static void main(String[] args){
+  int[] numbers = {1,2,3};
+  int index = 5; // 존재하지 않는 인덱스
+  try {
+    int result = numbers[index]; // 존재하지 않는 인덱스를 출력하려고 하니까 catch가 실행
+    System.out.println("결과: " + result);
+  } catch(Exception e){
+    System.out.println("문제 발생");
+  }
+}
+```
+---
+
+### catch
+- 예외의 종류에 따른 처리
+
+#### 예시
+```commandline
+public static void main(String[] args){
+  int[] numbers = {1,2,3};
+  int index = 5; // 존재하지 않는 인덱스
+  try {
+    int result = numbers[index];
+    System.out.println("결과: " + result);
+  } catch(ArrayIndexOutOfBoundsException e){   // 여기 괄호안에 예외의 종류에 따라서 catch문에 문장이 실행, 지금 괄호안에 예외처리는 잘못된 인덱스 일경우에 코드 실행
+    System.out.println("문제 발생");
+  }
+}
+```
+---
+
+### 예외 발생시키기
+- 의도적으로 예외 상황 만들기
+- throw new 예외();
+
+#### 예시
+```commandline
+public static void main(String[] args){
+  try {
+    int age = -5;
+    if (age < 0){ // 나이는 음수가 될 수 없다.
+      throw new Exception("나이는 음수일 수 없습니다"); // throw 키워드를 통해 발생
+    }
+  } catch(Exception e){
+    System.out.println(e.getMessage()); // e.getMessage()로 throw 에 적혀있는 문장 출력
+  }
+}
+```
+---
+
+### Finally
+- 예외가 실행되던 안되던 항상 실행되는 코드. 코드에서 사용되는 리소스를 해제 하거나 정리작업을 하기 위해서 사용
+```commandline
+try {
+  명령문
+} catch(변수) {
+  예외 처리
+} finally {
+  명령문
+}
+```
+
+#### 예시
+```commandline
+public static void main(String[] args){
+  try {
+    int reusult = 3 / 0;
+  } catch(Exception e){
+    System.out.println("문제 발생");
+  } finally {
+    System.out.println("실행 종료"); // 문제 발생 여부와 상관없이 실행됨
+  }
+}
+```
+---
+
+### Try With Resources
+- 리소스 관리를 편하게 할 수 있는 방법.
+```commandline
+try (자원할당) {
+  명령문
+} catch(변수) {
+  예외 처리
+}
+```
+
+#### 예시
+```commandline
+public static void main(String[] args){
+  try(FileWriter writer = new File Writer("file.txt")) {  // FileWriter 리소스를 할당
+    writer.write("hi");  // 파일에 "hi" 문자열을 작성
+  } catch(Exception e){
+    System.out.println("문제 발생");
+  }
+}
+```
+---
+
+### 사용자 정의 예외
+- 개발자가 직접 정의한 예외 클래스로 특정 상황에서 발생시키고자 할때 사용
+```commandline
+class 클래스명 extends Exception {  //exception 클래 상속해서 만들어 줄 수 있음
+}
+```
+
+#### 예시
+```commandline
+class MyException extends Exception {
+  public MyException(String message) {
+    super(message);
+  }
+}
+
+public static void main(String[] args){
+  try {
+    int age = -5;
+    if (age < 0){ 
+      throw new MyException("나이는 음수일 수 없습니다"); // throw 키워드를 통해 발생
+    }
+  } catch(MyException e){
+    System.out.println("문제 발생: " + e.getMessage());
+  }
+}
+```
+---
+
+### 예외처리 미루기 (throws)
+- 메소드를 수행할 때 메소드를 호출한 곳에서 처리
+```commandline
+반환형 메소드명() throws 예외 {
+  명령문
+}
+```
+
+#### 예시
+```commandline
+public static int divide(int a , int b) throws Excepton {
+  return a / b;
+}
+public static void main(String[] args){
+  try {
+    divide(3, 0);  // 위의 return a / b 에서 문제 발생할 것임. 이 때 trows 를 통해서 발생된 예외를 호출한 메서드 쪽으로 미룬다.
+  } catch(Excepton e){
+    System.out.println("0으로 나눌 수 없어요");  // 예외처리를 이 곳에서 하게됨
+  }
+}
+```
+---
+
+### Thread
+- 여러 작업을 동시에 수핼할 때 사용
+```commandline
+class 클래스명 extends thread {
+  public void run() {
+  // run() 메서드 정의
+  }
+}
+```
+
+#### 예시
+```commandline
+class MyThread extends Thread {
+  public void run(){
+    for (int i = 1; i <= 5; i++) {
+      System.out.println("Tread:" + i);
+    }
+  }
+}
+
+public static void main(String[] args) {
+  MyThread thread = new MyThread();
+  thread.start();  // 새로운 쓰레드에서 run() 동작 수행
+}
+// 실행 결과
+// Tread: 1
+// Tread: 2
+// ...
+// Tread: 5
+```
+---
+
+### Runnable
+- 여러작업을 동시에 사용하기 위해서 사용(쓰레드랑 동일 하지만 runnable은 인터페이스이다)
+```commandline
+class 클래스명 implements Runnable {  // runnable은 인터페이스이기 때문에 extends 가 아니고 implements로 구현
+  public void run() {
+    // 여기 적혀있는 코드를 새로운 쓰레드에서 실행하게 된다.
+  }
+}
+```
+
+#### Tread 와 차이점
+- 자바에서는 클래스를 다중 상속 할 수 없기 때문에 Thread 클래스를 상속하게되면 다른 클래스는 상속이 불가능. 하지만 Runnable 인터페이스를 사용하면 다른 클래스를 상속할 수 있다.
+
+#### 예시
+```commandline
+class MyThread extends Thread {
+  public void run(){
+    for (int i = 1; i <= 5; i++) {
+      System.out.println("Runnable:" + i);
+    }
+  }
+}
+
+public static void main(String[] args) {
+  MyRunnable runnable = new MyRunnable();
+  Thread thread = new Thread(runnable); // 새로운 Thread 객체를 만들어 앞의 runnable 객체를 전달.
+  thread.start();
+}
+```
+---
+
+### Join
+- Thread 실행 마칠 때까지 대기하기 위해서 사용
+```commandline
+public stattic void main(String[] args) throws InteruptedException {  // join 쓸경우 예외처리 해주어야 한다.
+  Thread thread = new Thread(() -> {  //메인 메서드 내에서 수행될 객체들 만들고
+    for (int i = 1; i <= 5; i++) {
+      System.out.println("Thread: " + i);
+    }
+  });
+  thread.start();
+  // thread.join();  // join 을 안쓸 경우에 "Thread: i" 와 "Method: i"가 반복하면서 출력되지만 thread.join을 쓸경우 thread의 실행을 마칠 때까지 대기한다.
+  method(); 
+}
+
+public static void method() {  // 별도의 메서드 에서도 위와 유사한 작업을 하는 코드
+  for (int i = 1; i <= 5; i++) {
+    System.out.println("Method: " + i);
+  }
+}
+```
+---
+
+### 다중 쓰레드
+- 여러 쓰레드를 동시에 수행하는 것.
+
+#### 예시
+```commandline
+public stattic void main(String[] args) {
+  Thread thread1 = new Thread(() -> { 
+    for (int i = 1; i <= 5; i++) {
+      System.out.println("Thread1: " + i);
+    }
+  });
+  Thread thread2 = new Thread(() -> {
+    for (int i = 1; i <= 5; i++) {
+      System.out.println("Thread2: " + i);
+    }
+  });
+  
+  thread1.start();
+  thread2.start(); // thread1 과 thread2 가 번갈아 가면서 실행된다.
+}
+```
+---
+
+### 동기화
+- 여러 쓰레드가 공유된 자원에 동시에 접근하지 못하게 막는것
+```commandline
+synchreonized 메소드명() {  // 특정 쓰레드가 이 메소드를 사용하는 동안 다른 쓰레드는 이 메소드를 사용할 수 없게 된다.
+
+}
+
+synchreonized(변수) {  // 어떤 쓰레드가 이 변수에 대해 작업하는동안 다른 쓰레드는 이 변수의 값을 바꿀 수 없게 된다.
+  
+}
+```
+
+#### 예시
+```commandline
+class SharedData {
+  public int data = 0;  
+  synchronized public void increment() {  // synchronized 키워드로 인해서 이 메서드를 사용할때는 한번의 하나의 수행만 접근할 수 있게 된다.
+    data++;
+  }
+}
+
+public stattic void main(String[] args) throws InteruptedException {
+  SharedData sharedData = new SharedData();
+  Thread thread1 = new Thread(() -> { 
+    for (int i = 1; i < 1000; i++) {
+      sharedData.increment();
+    }
+  });
+  
+  Thread thread2 = new Thread(() -> {
+    for (int i = 1; i < 1000; i++) {
+      sharedData.increment();
+    }
+  });
+  
+  thread1.start();
+  thread2.start();
+  
+  thread1.join();
+  thread2.join();
+  
+  System.out.println("SharedData: " + SharedData.data); // SharedData: 2000
+}
+// 만약에 맨 윗단의 increment메소드의 synchronized 키워드를 삭제한다면 값이 컴퓨터마다 다르게 나온다.
+```
+---
+
+### 입력
+- 프로그램으로 데이터를 가져오기
+- Scanner sc = new Scanner(System.in);  -> 사용자가 키보드로 입력하는 값을 받아 올 수 있다.
+  - scanner 기능
+    - next : 문자열 입력(단어 단위) // String word = sc.next();
+    - nexlnt : 정수 입력
+    - nextDouble : 실수 입력
+    - nextLin : 문장 입력(줄 단위)
+---
+
+### 출력
+- 프로그램에서 결과를 표시하거나 저장
+- system.out.porint();
+- system.out.porintln();
+- system.out.porintf();  // System.out.printf("이름: %s, 나이: %d", name, age)
+---
+
+### 파일과 폴더
+- 샐성, 삭제, 정보 조회 등 여러 작업 수행
+```commandline
+String fileName = "test.txt";
+File file = new File(fileName);  // 파일을 생성하는 과정에서 예외가 발생 할 수 있기 때문에 try catch 써줌
+try {
+} catch {
+}
+```
+- file 관련 기능
+  - createNewFile : 새 파일 생성
+  - exists : 파일 또는 폴더 존재 여부
+  - getName : 이름 정보
+  - getAbsolutePath : 절대 경로 정보
+- 폴더 관련 기능
+  - mkdir : 폴더 만들기
+  - mkdirs : 폴더들 만들기
+  - listFiles : 파일 및 폴더 목록 조회
+---
