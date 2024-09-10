@@ -3,6 +3,7 @@
 > 출처 : 점프 투 자바, 나도코딩  자바 무료 강의 2시간 완성
   
 ### 문자열 비교
+
 ```
 String s1 = "Java"; // 이렇게 선언하면 메모리 한공간에 Java가 올라간다
 String s2 = "Java"; // 하나 더 쓰면 위에 쓴것과 같은 메모리 공간을 공유한다.
@@ -14,6 +15,7 @@ String s2 = new String("Java");
 - 비교할때는 == 이 아닌 equals로 비교
 
 ### 예시
+
 ```
 public class Sample {
     public static void main(String[] args) {
@@ -23,6 +25,7 @@ public class Sample {
 ```
 
 ### 클래스 블록
+
 ```
 public class 클래스명 {
 }
@@ -32,6 +35,7 @@ public class 클래스명 {
 ---
 
 ### 메서드 블록
+
 ```
 [public|private|protected] [static] (리턴자료형|void) 메서드명1(입력자료형 매개변수, ...) {
         명령문(statement);
@@ -40,12 +44,14 @@ public class 클래스명 {
 ```
 
 #### public, private, protected 는 메서드의 **접근 제어자**이다.
+
 - private : 해당 클래스 내에서만
 - public : 모든 클래스에서
 - default : 같은 패키지 내에서만(아무것도 적지 않았을때 적용)
 - protected : 같은 패키지 내에서, 다른 패키지인 경우 자식 클래스에서만 접근 가능
 
 #### static 이 붙으면 static 메서드가 된다.
+
 ```
 class Counter  {
     static int count = 0;
@@ -63,9 +69,11 @@ class Counter  {
 ---
 
 ### Java VS JavaScript
+
 // 계속 헷갈리는 개념 정리..
 
 #### 배열
+
 1. 자바
    - 정적 배열: 배열의 크기가 고정되어 있으며, 배열을 생성할 때 그 크기를 지정해야 한다.
    배열의 크기는 한 번 설정하면 변경할 수 없다.
@@ -97,6 +105,7 @@ console.log(numbers.length); // 출력: 6
 ```
    
 #### 객체
+
 1. 자바
     - 클래스 기반: 객체는 클래스를 통해 정의된다. 클래스는 객체의 상태(속성)와 동작(메소드)을 정의한다.
     - 인스턴스 생성: 'new' 키워드를 사용하여 클래스의 인스턴스를 생성한다.
@@ -107,6 +116,7 @@ console.log(numbers.length); // 출력: 6
 ---
 
 ### 인스턴스 생성
+
 - 객체(인스턴스)를 생성하는 과정은 클래스의 설계와 객체 지향 프로그래밍의 핵심 개념을 이해하는데 중요하다.
 - 가장 일반적인 방법은 `new` 키워드를 사용하는 것
 ```
@@ -128,7 +138,7 @@ public class Main {
   person.introduce();
  }
 }
-   ```
+```
 - Classname : 생성하려는 객체의 클래스 이름
 - objectname : 생성된 객체의 참조를 담을 변수 이름
 - new ClassName() : 클래스의 생성자를 호출하여 객체를 생성한다.
@@ -136,6 +146,7 @@ public class Main {
 ---
 
 ### 인스턴스 변수
+
 - 클래스내에 선언된 변수
 ```
 class 클래스명 {
@@ -159,6 +170,7 @@ public static void main(String[] args){
 ```
 
 ### 클래스 변수
+
 - 클래스 내에 static으로 선언된 변수(모든 객체가 공유하는 변수)
 - 인스턴스 변수와 달리 객체 만들필요 없이 클래스 접근 가능
 ```
@@ -176,6 +188,7 @@ public static void main(String[] args){
 ---
 
 ### 인스턴스 메소드
+
 - 클래스 내에 정의된 메소드
 ```
 class 클래스명{
@@ -204,6 +217,7 @@ public static void main(String[] args){
 ---
 
 ### 클래스 메소드
+
 - 클래스 내에  static 으로 정의된 메소드
 ```
 class 클래스명 {
@@ -222,6 +236,7 @@ public static void main(String[] args){
 ---
   
 ### This 
+
 - 자기자신(보통 클래스 내에서 인스턴스 변수 / 지역변수 구분하기 위해서 사용)
 - 사용법 : This.인스턴스변수;
 ```
@@ -240,6 +255,7 @@ public static void main(Stinrg[] args){
 ---
   
 ### 생성자
+
 - 객체가 생성될때 호출되는 메소드
 - 클래스 내에서 생성자는 클래스명 괄호안에 전달값을 받아서 객체를 생성할때 쓸수 있다.
 ```
@@ -262,6 +278,7 @@ public static void main(Stinrg[] args){
 ---
   
 ### Getter
+
 - 인스턴스 변수의 값 반환
 ```
 반환형 get을 포함한 이름(){
@@ -277,6 +294,7 @@ class Person{
 ```
   
 ### Setter
+
 - 인스턴스 변수의 값 설정
 ```commandline
 void set이름(전달값){
@@ -291,6 +309,7 @@ class Person{
 ```
 
 ### Getter 와 Setter
+
 ```
 public static void main(Stinrg[] args){
        Person person = new person();
@@ -301,6 +320,7 @@ public static void main(Stinrg[] args){
 ---
 
 ### 상속
+
 ```commandline
 class 자식 클래스명 estends 부모 클래스명{
     // 확장할 내용
@@ -309,6 +329,7 @@ class 자식 클래스명 estends 부모 클래스명{
 ---
 
 ### 메소드 오버라이딩
+
 - 부모 클래스의 메소드 재정의
 ```commandline
 // 부모클래스
@@ -327,6 +348,7 @@ class Student extends Person{
 ---
   
 ### 다형성
+
 ```commandline
 // 부모클래스
 class Person{
@@ -352,11 +374,13 @@ public static void main(String[] args){
 ---
 
 ### Super
+
 - 부모클래스에 접근하기 위해서 사용
 - super.부모 클래스 변수;
 - supre.부모 클래스 메소드();
 
 ### 참조
+
 - 객체의 메모리 주소를 가리킴
 - 기본 자료형 : 실제 값 저장 // int, float, double, long, boolean...
 - 참조 자료형 : 값이 저장된 메모리 주소를 저장 // String, Person, Student...
@@ -372,11 +396,13 @@ s1 = s2; // s2가 가리키고 있던 값을 s1 도 가리키게 되면서 s1 �
 ---
 
 ### Final
+
 - 변경할 수 없게 쓰는 키워드
 - 변수에 사용 : final String name = "철수"; // name은 변경할 수 없게 된다. 값을 무조건 할당 해주어야 한다.
 - 메소드에 사용 : public final void introduce(){} // introduce 라고 하는 메소드를 새롭게 정의 불가능. 자식 클래스에서 오버라이딩 할 수 없게 된다
 
 ### 열거형
+
 ```commandline
 enum Gender{
    Male,
@@ -403,6 +429,7 @@ public static void main(String[] args){
 ---
 
 ### 추상 클래스
+
 - 아직 완성되지 않은 클래스
 - 키워드: abstract
 ```commandline
@@ -422,6 +449,7 @@ class Square extends Shape{ // 정사각형을 만들기 위한 클래스 선언
 ---
 
 ### 인터페이스
+
 - 클래스를 작성할때 기본이 되는 뼈대
 ```commandline
 //추상클래스
@@ -448,6 +476,7 @@ class Square implements Shape{ //Shape 인터페이스 안에 메소드를 여�
 ---
 
 ### 제네릭스
+
 - 다양한 형태의 데이터를 다룰 수 있게 해주는 것. 코드의 재사용성을 높이고 타입 안정성 확보 가능
 ```commandline
 T 변수명
@@ -479,6 +508,7 @@ public static void main(String[] args){
 ---
 
 ### 제네릭 클래스
+
 - 제네릭 기반 클래스 다양한 데이터 유형을 처리할 수 있게 설계된 클래스
 ```commandline
 // 사용법
@@ -524,6 +554,7 @@ public static void main(Stinrg[] args){
 ---
 
 ### Wrapper 클래스
+
 - 기본 자료형 + 추가 기능 제공 클래스
 - Integer -> int
 - Double -> double
@@ -548,9 +579,11 @@ public static void main(String[] args){
 ---
 
 ### 익명 클래스
+
 - 한번만 사용되는 이름 없는 클래스
 
 #### 예시
+
 ```commandline
 class Person{
  public void introduce(){
@@ -576,9 +609,11 @@ public stoatic void main(String[] args){
 ---
 
 ### 람다식
+
 - 간결한 형태의 코드 묶음. 메소드의 동작을 간단하게 표현하기 위해서 사용
 
 #### 예시
+
 - (전달값1, 전달값2, ...) -> {코드}
 ```commandline
 // 두개의 수를 받아서 더해주는 add 메서드
@@ -596,10 +631,12 @@ public int add(int x, int y) {
 ---
 
 ### 함수형 인터페이스
+
    - 람다식을 위한 인터페이스
    - 함수형 인터페이스는 딱 하나의 추상메서드를 가져야 한다는 제약사항이 있음
 
 #### 예시
+
 ```commandline
 @FunctionalInterface
 interface 인터페이스명 {
@@ -621,9 +658,11 @@ public static void main(String[] args) {
 ---
 
 ### 스트림
+
 - 배열 또는 컬랙션 데이터를 효과적으로 처리
 
 #### 예시
+
 ```commandline
 public static void main(String[] args){
   List<INteger> numbers = Arrays.asList(1,2,3,4,5);
@@ -637,6 +676,7 @@ public static void main(String[] args){
 ---
 
 ### 예외처리
+
 - try catch
 ```commandline
 try {
@@ -648,6 +688,7 @@ try {
 ```
 
 #### 예시
+
 ```commandline
 public static void main(String[] args){
   int[] numbers = {1,2,3};
@@ -663,9 +704,11 @@ public static void main(String[] args){
 ---
 
 ### catch
+
 - 예외의 종류에 따른 처리
 
 #### 예시
+
 ```commandline
 public static void main(String[] args){
   int[] numbers = {1,2,3};
@@ -681,10 +724,12 @@ public static void main(String[] args){
 ---
 
 ### 예외 발생시키기
+
 - 의도적으로 예외 상황 만들기
 - throw new 예외();
 
 #### 예시
+
 ```commandline
 public static void main(String[] args){
   try {
@@ -700,6 +745,7 @@ public static void main(String[] args){
 ---
 
 ### Finally
+
 - 예외가 실행되던 안되던 항상 실행되는 코드. 코드에서 사용되는 리소스를 해제 하거나 정리작업을 하기 위해서 사용
 ```commandline
 try {
@@ -712,6 +758,7 @@ try {
 ```
 
 #### 예시
+
 ```commandline
 public static void main(String[] args){
   try {
@@ -726,6 +773,7 @@ public static void main(String[] args){
 ---
 
 ### Try With Resources
+
 - 리소스 관리를 편하게 할 수 있는 방법.
 ```commandline
 try (자원할당) {
@@ -736,6 +784,7 @@ try (자원할당) {
 ```
 
 #### 예시
+
 ```commandline
 public static void main(String[] args){
   try(FileWriter writer = new File Writer("file.txt")) {  // FileWriter 리소스를 할당
@@ -748,6 +797,7 @@ public static void main(String[] args){
 ---
 
 ### 사용자 정의 예외
+
 - 개발자가 직접 정의한 예외 클래스로 특정 상황에서 발생시키고자 할때 사용
 ```commandline
 class 클래스명 extends Exception {  //exception 클래 상속해서 만들어 줄 수 있음
@@ -755,6 +805,7 @@ class 클래스명 extends Exception {  //exception 클래 상속해서 만들�
 ```
 
 #### 예시
+
 ```commandline
 class MyException extends Exception {
   public MyException(String message) {
@@ -776,6 +827,7 @@ public static void main(String[] args){
 ---
 
 ### 예외처리 미루기 (throws)
+
 - 메소드를 수행할 때 메소드를 호출한 곳에서 처리
 ```commandline
 반환형 메소드명() throws 예외 {
@@ -784,6 +836,7 @@ public static void main(String[] args){
 ```
 
 #### 예시
+
 ```commandline
 public static int divide(int a , int b) throws Excepton {
   return a / b;
@@ -799,6 +852,7 @@ public static void main(String[] args){
 ---
 
 ### Thread
+
 - 여러 작업을 동시에 수핼할 때 사용
 ```commandline
 class 클래스명 extends thread {
@@ -809,6 +863,7 @@ class 클래스명 extends thread {
 ```
 
 #### 예시
+
 ```commandline
 class MyThread extends Thread {
   public void run(){
@@ -831,6 +886,7 @@ public static void main(String[] args) {
 ---
 
 ### Runnable
+
 - 여러작업을 동시에 사용하기 위해서 사용(쓰레드랑 동일 하지만 runnable은 인터페이스이다)
 ```commandline
 class 클래스명 implements Runnable {  // runnable은 인터페이스이기 때문에 extends 가 아니고 implements로 구현
@@ -841,9 +897,11 @@ class 클래스명 implements Runnable {  // runnable은 인터페이스이기 �
 ```
 
 #### Tread 와 차이점
+
 - 자바에서는 클래스를 다중 상속 할 수 없기 때문에 Thread 클래스를 상속하게되면 다른 클래스는 상속이 불가능. 하지만 Runnable 인터페이스를 사용하면 다른 클래스를 상속할 수 있다.
 
 #### 예시
+
 ```commandline
 class MyThread extends Thread {
   public void run(){
@@ -862,6 +920,7 @@ public static void main(String[] args) {
 ---
 
 ### Join
+
 - Thread 실행 마칠 때까지 대기하기 위해서 사용
 ```commandline
 public stattic void main(String[] args) throws InteruptedException {  // join 쓸경우 예외처리 해주어야 한다.
@@ -884,9 +943,11 @@ public static void method() {  // 별도의 메서드 에서도 위와 유사한
 ---
 
 ### 다중 쓰레드
+
 - 여러 쓰레드를 동시에 수행하는 것.
 
 #### 예시
+
 ```commandline
 public stattic void main(String[] args) {
   Thread thread1 = new Thread(() -> { 
@@ -907,6 +968,7 @@ public stattic void main(String[] args) {
 ---
 
 ### 동기화
+
 - 여러 쓰레드가 공유된 자원에 동시에 접근하지 못하게 막는것
 ```commandline
 synchreonized 메소드명() {  // 특정 쓰레드가 이 메소드를 사용하는 동안 다른 쓰레드는 이 메소드를 사용할 수 없게 된다.
@@ -919,6 +981,7 @@ synchreonized(변수) {  // 어떤 쓰레드가 이 변수에 대해 작업하�
 ```
 
 #### 예시
+
 ```commandline
 class SharedData {
   public int data = 0;  
@@ -954,6 +1017,7 @@ public stattic void main(String[] args) throws InteruptedException {
 ---
 
 ### 입력
+
 - 프로그램으로 데이터를 가져오기
 - Scanner sc = new Scanner(System.in);  -> 사용자가 키보드로 입력하는 값을 받아 올 수 있다.
   - scanner 기능
@@ -964,6 +1028,7 @@ public stattic void main(String[] args) throws InteruptedException {
 ---
 
 ### 출력
+
 - 프로그램에서 결과를 표시하거나 저장
 - system.out.porint();
 - system.out.porintln();
@@ -971,6 +1036,7 @@ public stattic void main(String[] args) throws InteruptedException {
 ---
 
 ### 파일과 폴더
+
 - 샐성, 삭제, 정보 조회 등 여러 작업 수행
 ```commandline
 String fileName = "test.txt";
