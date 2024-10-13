@@ -7,7 +7,7 @@ gradle은 Groovy 기반의 오픈소스 빌드 도구 이다.
 
 ### 프로젝트 구성
 
-<img src="https://github.com/KWAK-JINHO/TIL/blob/main/Tools/img/gradle_recognition_issue2.png"  width="30%" height="30%"/>
+<img src="https://github.com/KWAK-JINHO/TIL/blob/main/Tools/img/gradle_recognition_issue2.png"  width="20%" height="20%"/>
 
 - .gradle - gradle 버전 별 엔진 및 설정 파일
 - .idea - 에디터 관련 파일들
