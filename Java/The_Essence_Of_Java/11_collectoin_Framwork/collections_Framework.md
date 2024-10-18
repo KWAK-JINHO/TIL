@@ -112,11 +112,48 @@
 
 ### HashSet
 
----
+- 순서x, 중복x
+- set인터페이스 구현
+- set은 보통 HashSet을 쓰는데 저장순서를 유지하려면 LinkedHashList 사용하면 된다.
+- add메서드를 사용하려고 하면(커스텀 객체) equals()와 hashCode()를 호출하기 때문에 이 둘을 오버라이딩 해줘야 한다. //예제 Ex11_24 확인
+- equals와 hashcode는 같이 오버라이딩 하는게 정석이다. hash가 붙은 클래스들은 hash코드를 내부적으로 자주사용하기 때문에.
+- return (name+age).hashCode() -> return objects.hash(name+age) 최신에는 이렇게 쓴다.
 
-#### 해싱이란?
+### TreeSet
 
-- 데이터를 고정된 크기의 값으로 변환하는 과정
-    1. 입력 데이터를 해시 함수를 통해 고정 길이의 해시값으로 변환
-    2. 같은 입력을 항상 같은 해시값 생성
-    3. 이상적으로는 서로 다른 입력이 같은 해시값을 갖는 경우가 최소화 되어야 한다.
+- 순서o, 중복x
+- 정렬순서는 o, 저장순서는 x
+- 편향트리를 방지하기 위해서 내부에 레드-블랙트리를 사용해 구현했다.
+- 이진탐색트리 구조로 데이터 저장
+- 범위검색과 정렬에 유리하다.
+- HashSet보다 데이터 추가,삭제에 시간이 더 걸린다.
+
+### 이진탐색트리
+
+- 부모보다 작으면 왼쪽, 크면 오른쪽
+- 범위검색 매우 빠르다
+- 순차적이지 앚ㅎ아서 추가/삭제 오래 걸린다.
+
+### HashMap
+
+- 순서x, 중복(key X, vaule O)
+- 동기화x
+- 순서필요하면 linkedHasMap사용
+- 해싱 기법으로 데이터 저장, 검색 빠르다(데이터가 커도)
+- Entry[]에 저장
+
+### 해싱
+
+- 해쉬함수를 이요해서 hash table의 데이터를 저장하고 읽어 오는 것
+- 같은 key를 넣으면 항상 같은 HashCode 나온다. -> 자징 & 읽기 같은 값이 나와야 한다.
+    - 서로 다른 key여도 같은 hashcode 반환 가능.
+- Hash Table: Array(접근성) + LinkedList(변경유리)
+- Hash Function: table, HashMap, HashSet => Objects.hash()사용해서 작성
+
+### TreeMap
+
+- key, value로 저장되는 것 빼면 TreeSet 과 똑같다
+
+### Collections
+
+- collection 관련 메서드 제공

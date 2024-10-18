@@ -12,31 +12,30 @@ public class Ex11_24 {
 
         System.out.println(set);
     }
+}
 
-    class Person2 {
-        String name;
-        int age;
+class Person2 {
+    String name;
+    int age;
 
-        Person2(String name, int age) {
-            this.name = name;
-            this.age = age;
+    Person2(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public boolean equals(Object obj) {
+        if (obj instanceof Person2 tmp) {
+            return name.equals(tmp.name) && age == tmp.age;
         }
 
-        public boolean equals(Object obj) {
-            if (obj instanceof Person2 tmp) {
-                return name.equals(tmp.name) && age == tmp.age;
-            }
+        return false;
+    }
 
-            return false;
-        }
+    public int hashCode() {
+        return Objects.hash(name + age);
+    }
 
-        public int hashCode() {
-            return Objects.hash(name + age);
-        }
-
-        public String toString() {
-            return name + ":" + age;
-        }
-
+    public String toString() {
+        return name + ":" + age;
     }
 }
