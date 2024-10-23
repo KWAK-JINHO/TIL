@@ -11,7 +11,7 @@ public class test {
         System.out.println(Arrays.toString(arr));
 
         for (int i = 0; i < 5; i++) {
-            if (5 >= 0) System.arraycopy(arr, 5 * i, arr2[i], 0, 5);
+            System.arraycopy(arr, 5 * i, arr2[i], 0, 5);
         }
         System.out.println(Arrays.deepToString(arr2));
 
@@ -27,13 +27,9 @@ public class test {
             }
         }
 
-        int i = 0;
-
-        for (int j = 0; j < 5; j++) {
-            for (int k = 0; k < 5; k++) {
-                arr[i] = arr2[j][k];
-                i++;
-            }
+        for (int j = 0; j < 25; j++) {
+            int tmp = j / 5;
+            arr[j] = arr2[tmp][j % 5];
         }
 
         System.out.println(Arrays.deepToString(arr2));
