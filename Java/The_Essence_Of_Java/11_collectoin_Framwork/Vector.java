@@ -6,21 +6,25 @@
 // v.size() == 1 이렇게 있을 때 위아래에서 확인하기
 // TDD -> 1. given 조건 2. when 테스트 3. assert 결과 확인 => 이 순서로 테스트 작성하자.
 
+//import java.util.Vector;
+
 public class Vector {
     public static void main(String[] args) {
         MyVector myVector = new MyVector();
-        myVector.objArr[0] = new Object();
-        myVector.objArr[1] = new Object();
-        myVector.objArr[2] = "ㄴㄹㅇㅎ";
-        System.out.println(myVector.size());
-
+//        myVector.objArr[0] = new Object(); // 직접 인덱스 접근시 null 값의 관리 어려움
+        myVector.add(null);
+        myVector.add(67);
+//        for (int i = 0; i < 1000000; i++) {
+//            myVector.add(4);
+//        }
+        System.out.println(myVector);
     }
 }
 
 class MyVector {
-    Object[] objArr = {};
-    int capacity;
-    int size;
+    private final int capacity;
+    private Object[] objArr = {};
+    private int size;
 
     MyVector() {
         this(16);
@@ -31,19 +35,82 @@ class MyVector {
         objArr = new Object[capacity];
     }
 
+    // 배열에 저장된 객체의 개수를 반환 하는 메서드,
     int size() {
-        size = 0;
-        for (int i = 0; i < this.objArr.length; i++) {
-            if (this.objArr[i] != null) size++;
-        }
+//        size = 0;
+//        for (int i = 0; i < this.objArr.length; i++) {
+//            if (this.objArr[i] != null) size++;
+//        }
         return size;
     }
 
-//    int capacity() {
-//
-//    }
+    // this.capacity 로 얻은 값은 실제 길이가 아니고 할당 받은 것이기 때문에 length 사용
+    int capacity() {
+        return objArr.length;
+    }
 
-//    boolean isEmpty() {
-//
-//    }
+    // 객체배열이 비었는지 확인하는 메서드
+    boolean isEmpty() {
+        for (Object obj : objArr) if (obj != null) return false;
+        return true;
+    }
+
+    // 객체를 추가하는 메서드 void add(Object obj)
+    // capacity가 full일때 배열길이 두배로 증가 후 복사
+    void add(Object object) {
+        if (size >= objArr.length) {
+            Object[] newArr = new Object[objArr.length * 2];
+            System.arraycopy(objArr, 0, newArr, 0, objArr.length);
+            objArr = newArr;
+        }
+        objArr[size++] = object;
+    }
+
+    // 해당 인덱스 객체 반환 메서드 Object get(index)
+    // 들어오는 값 체크 숫자인지, 음수인지 체크, 배열 밖의 인덱스 인지 체크   <------------- 확인 필요
+    Object get(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("인덱스를 확인해 주세요");
+        }
+        return objArr[index];
+    }
+
+    // 객체배열에 저장된 모든 객체를 문자열로 이어서 반환하는 toStinrg 오버라이딩
+    @Override
+    public String toString() {
+        String mergeStr = "";
+        for (int i = 0; i < size; i++) {
+            mergeStr += objArr[i];
+        }
+        return mergeStr;
+    }
+
+    // 지정된 객체가 저장되어 있는 위치(index) 반환하는 int indexOf
+    int indexOf(Object obj) {
+        if (obj == null) { //null 은 아무것도 참조 하지 않으므로 equals 사용 불가 때문에 따로 체크 해줘야 한다.
+            for (int i = 0; i < size(); i++) {
+                if (objArr[i] == null) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+        for (int i = 0; i < size(); i++) {
+            if (obj.equals(objArr[i])) { // 기본형인 경우 == 로 가능하지만 참조형인 경우 ==로 비교하면 주소를 비교하기 때문에 불가능
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    // objArr에서 지정된 객체를 삭제하는 boolean remove(Object obj)작성  (* indexOf()이용할 것)
+    boolean remove(Object object) {
+        int removeIdx = indexOf(object);
+        if (removeIdx >= 0) {
+            System.arraycopy(objArr, removeIdx + 1, objArr, removeIdx, size - removeIdx);
+            objArr[size - 1] = null;
+            size--;
+            return true;
+        } else return false;
+    }
 }
