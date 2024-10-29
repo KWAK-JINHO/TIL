@@ -33,5 +33,7 @@ public class Ex12_5 {
 
         for (Direction d : dArr)
             System.out.printf("%s=%d%n", d.name(), d.ordinal());
+
+
     }
 }

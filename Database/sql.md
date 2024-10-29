@@ -1,5 +1,3 @@
-> 출처 - SQL 첫걸음
-
 # 1장 / 데이터베이스와 SQL
 
 ### DataBase란?
@@ -47,3 +45,46 @@
 1. 클라이언트의 서버로의 요청
 2. CGI프로그램이 DB서버에 접속, SQL명령 전달 (CGI가 DB의 클라이언트가 됨)
 3. HTML 응답
+
+### RDBMS
+
+- 관계형 데이터베이스는 테이블처럼 데이터 관리한다.
+
+#### key
+
+- 조건에 맞는 데이터를 찾기 위한 식별자
+- 우선 다룰 주요한 키는 기본키, 외래키, 고유키
+- 이론적)후보 키, 보조 키, 기본 키, 대체 키, 슈퍼 키, 외래 키
+- 행을 특정 지을 수 있는 단 하나의 데이터는 기본키 이다. 중복 x, NULL x
+
+- -다른 테이블을 참조하기 위한 (연관시키기위한) 키 -> 왜래키
+- 참조하는 데이터가 삭제 되는-> on delete
+- 참조하는 데이터가 변경되는 -> on update
+- SET NULL : 전부 NULL값으로 채워라
+- CASCADE: 함꼐 변경해라(함께, 함께 업데이트)
+- RESTRICT: 삭제, 업데이트 자체를 제한
+
+### select
+
+밑에 순서도 외워주는게 좋다.
+
+- SELECT 컬럼 - 어떤 열을 검색할지
+    - as 해당 별명으로 보여줌
+    - distinct 중복제거 후 보여줌
+- FROM 테이블 - 어떤 테이블을 검색할지
+- WHERE 조건 - 어떤걸 조회하고 싶은지 (조건식)
+    - In, not in 으로 조건에 포함여부
+    - where not 조건에 만족 안하는
+    - is not 값이 해당 값이 아닐때
+- GROUP BY 그룹화할 컬럼
+- HAVING 필터_조건
+- ORDER BY 정렬할 컬럼 - 정렬할 기준(오름차순, 내림차순)
+    - asc 오름차순
+    - decs 디센딩
+- Limit (개수)
+    - offset 개수 건너뛰고
+
+#### 예시
+
+- SELECT * FROM Company WHERE age > 23 AND age < 35;
+- SELECT * FROM Company WHERE age BETWEEN 23 AND 35;

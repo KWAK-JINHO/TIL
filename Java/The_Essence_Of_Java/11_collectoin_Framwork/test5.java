@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class test5 {
     public static void main(String[] args) {
         int[][] arr = {
@@ -58,6 +61,13 @@ public class test5 {
             bingo++;
         }
 
+        Object a = new hi();
+        List<Object> ab = new ArrayList<hi>();
+
         return bingo;
     }
+}
+
+class hi {
+
 }
