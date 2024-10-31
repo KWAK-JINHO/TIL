@@ -14,9 +14,13 @@ public class Vector {
 //        myVector.objArr[0] = new Object(); // 직접 인덱스 접근시 null 값의 관리 어려움
         myVector.add(null);
         myVector.add(67);
+        myVector.add("asb");
+        myVector.add(67);
+//        myVector.get(-1);
 //        for (int i = 0; i < 1000000; i++) {
 //            myVector.add(4);
 //        }
+        myVector.remove(67);
         System.out.println(myVector);
     }
 }
@@ -36,7 +40,7 @@ class MyVector {
     }
 
     // 배열에 저장된 객체의 개수를 반환 하는 메서드,
-    int size() {
+    public int size() {
 //        size = 0;
 //        for (int i = 0; i < this.objArr.length; i++) {
 //            if (this.objArr[i] != null) size++;
@@ -45,25 +49,25 @@ class MyVector {
     }
 
     // this.capacity 로 얻은 값은 실제 길이가 아니고 할당 받은 것이기 때문에 length 사용
-    int capacity() {
+    public int capacity() {
         return objArr.length;
     }
 
     // 객체배열이 비었는지 확인하는 메서드
-    boolean isEmpty() {
+    public boolean isEmpty() {
         for (Object obj : objArr) if (obj != null) return false;
         return true;
     }
 
     // 객체를 추가하는 메서드 void add(Object obj)
     // capacity가 full일때 배열길이 두배로 증가 후 복사
-    void add(Object object) {
+    public void add(Object obj) {
         if (size >= objArr.length) {
             Object[] newArr = new Object[objArr.length * 2];
             System.arraycopy(objArr, 0, newArr, 0, objArr.length);
             objArr = newArr;
         }
-        objArr[size++] = object;
+        objArr[size++] = obj;
     }
 
     // 해당 인덱스 객체 반환 메서드 Object get(index)
@@ -86,16 +90,16 @@ class MyVector {
     }
 
     // 지정된 객체가 저장되어 있는 위치(index) 반환하는 int indexOf
-    int indexOf(Object obj) {
+    public int indexOf(Object obj) {
         if (obj == null) { //null 은 아무것도 참조 하지 않으므로 equals 사용 불가 때문에 따로 체크 해줘야 한다.
-            for (int i = 0; i < size(); i++) {
+            for (int i = 0; i < size; i++) {
                 if (objArr[i] == null) {
                     return i;
                 }
             }
             return -1;
         }
-        for (int i = 0; i < size(); i++) {
+        for (int i = 0; i < size; i++) {
             if (obj.equals(objArr[i])) { // 기본형인 경우 == 로 가능하지만 참조형인 경우 ==로 비교하면 주소를 비교하기 때문에 불가능
                 return i;
             }
@@ -104,8 +108,8 @@ class MyVector {
     }
 
     // objArr에서 지정된 객체를 삭제하는 boolean remove(Object obj)작성  (* indexOf()이용할 것)
-    boolean remove(Object object) {
-        int removeIdx = indexOf(object);
+    boolean remove(Object obj) {
+        int removeIdx = indexOf(obj);
         if (removeIdx >= 0) {
             System.arraycopy(objArr, removeIdx + 1, objArr, removeIdx, size - removeIdx);
             objArr[size - 1] = null;
