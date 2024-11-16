@@ -64,5 +64,5 @@
 - DMA: 원래는 CPU만 메모리에 접근이 가능한데 인터럽트가 너무 자주 걸리는 걸 막기 위해서 두었다.
 - Memory Controller: CPU와 DMA가 동시에 메모리에 접근하지 않게 조율하는 역할
 - Timer: 한 가지 사용자 프로그램이 CPU를 독점하지 못하게 두었다.
-- Device Controller: I/O에 붙어있는 작은 CPU 같은 것
+- Device Controller: I/O에 붙어있는 작은 CPU 같은
 - Local Buffer: 헤드의 움직임 등 디스크 내부의 움직임을 통제. 일종의 data 레지스터. 외에도 제어정보를 위해 CPU가 device controller에게 일을 시키는 것.
