@@ -110,3 +110,42 @@ response.setContentType("text/html")
 
 * HTTP + TLS(암호화) 조합
 * 보안 강화된 프로토콜
+
+- form 태그를 써야하는데 Post man이라는 확장프로그램으로 반복적인 요청을 테스트 할때 편함
+
+## 텍스트파일과 바이너리파일
+
+바이너리파일: 문자와 숫자가 저장되어 있는파일
+쓰기, 읽기 모두 문자는 문자로 숫자는 숫자로 인식
+
+텍스트 파일: 문자만 있는 저장되어 있는 파일 ->  읽기 쉽다
+쓰기: 문자는 문자 숫자는 문자로 쓴다.
+읽기: 문자는 문자
+
+## MIME
+
+- 텍스트 기반 프로토콜에 바이너리 데이터 전송하기 위해서 고안함
+- 전송할 데이터의 타입을 적어주면 된다.
+
+| **타입**      | **설명**          | **MIME타입 예시(타입/서브타입)**                                                                                                            |
+|-------------|-----------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| text        | 텍스트를 포함하는 모든 문서 | text/plain, text/html, text/css, text/javascript                                                                                  |
+| image       | 모든 종류의 이미지      | image/bmp, image/webp                                                                                                             |
+| audio       | 모든 종류의 오디오 파일   | audio/midi, audio/mpeg,audio/webm, audio/ogg,audio/wav                                                                            |
+| video       | 모든 종류의 비디오 파일   | video/webm, video/ogg                                                                                                             |
+| application | 모든 종류의 이진 데이터   | application/octetstream,application/pkcs12, application/vnd.mspowerpoint, application/xhtml+xml, application/xml, application/pdf |
+|             |                 |                                                                                                                                   |
+
+## Base64
+
+2진법 = base2 = 0, 1
+10진법 = base10 = 0~9
+16진법 = base16 = 0~9 ABCDEF
+64진법 = A~Z, a-z, 0~9, +, / ⇒ 모두 64개(6 bit)의 문자로 구성
+
+HTML 링크가 있어서 편하지만 링크가 깨지기 쉽다. 하지만 HTML에 글자로 다 박으면 안깨짐
+
+### 바이너리 데이터를 텍스트 기반인 HTTP 프로토콜로 보내는 방법
+
+1. MIME으로 바이너리 그대로 보내기
+2. Base64로 바이너리를 텍스트로 변환해서 보낸다. 단점: Data의 사이즈가 커진다.
