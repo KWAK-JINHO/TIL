@@ -1,96 +1,112 @@
-# Spring 웹 개발 기초
+# HTTP와 웹 애플리케이션의 동작 원리
 
-### Spring Boot 스타터 사이트를 이용해 스프링 프로젝트 생성
+## 기본 요청 처리 흐름
 
-- [스프링 부트 스타터](https://start.spring.io)
+1. 클라이언트가 URL 요청
+2. Tomcat이 요청을 받고 HttpServletRequest 객체 생성
+3. 요청 받은 정보를 객체에 담음
+4. main 메서드 매개변수로 전달 (HttpServletRequest request)
+5. request 객체를 통해 요청 정보 접근 가능
 
-### IntelliJ에서 Gradle 대신 Java로 직접 실행
+## Spring MVC 기본 어노테이션
 
-- Gradle을 통해 실행되도록 설정되어 있다면, Java로 변경하는 것이 좋다. Java로 실행하면 속도가 더 빠르다.
+* `@Controller`: 해당 클래스가 웹 요청을 처리하는 컨트롤러임을 명시
+* `@RequestMapping`: URL 경로와 처리 메서드를 매핑
 
-### 정적 컨텐츠
+## 요청 처리 과정
 
-- 파일을 그대로 클라이언트에게 전달.
-- /static 폴더에 원하는 파일을 넣으면 정적 파일이 그대로 반환된다. 이 과정에서는 프로그래밍적인 처리가 불가능하다.
-- 웹 브라우저 -(파일 요청)-> 내장 톰캣 서버 -> 스프링 컨테이너(먼저 컨트롤러에서 해당 파일을 찾음) -> 파일이 없으면 스프링 부트가 resources에서 해당 파일을 찾음 -> HTML 파일을 브라우저에 반환.
+1. 메인 메서드 호출 및 매개변수 전달
+2. 비즈니스 로직 처리
+3. 결과 출력 (response 객체의 출력 스트림 사용)
 
-### MVC와 템플릿 엔진
+* **스트림**: 데이터 흐름을 처리하는 통로
 
-- 템플릿 엔진: HTML 파일을 동적으로 렌더링하여 내용을 변경할 수 있게 해주는 도구
-- 작동 원리
-  1. 웹 브라우저에서 요청을 보냄
-  2. 내장 톰캣 서버가 요청을 받는다
-  3. 스프링 컨테이너에서 매핑된 컨트롤러를 찾아 해당 메서드를 호출
-  4. 컨트롤러는 필요한 데이터를 Model에 담아 View 이름과 함께 반환
-  5. ViewResolver가 해당 View를 찾고 템플릿 엔진에 처리를 요청
-  6. 템플릿 엔진이 View를 렌더링하여 HTML로 변환
-  7. 변환된 HTML이 웹 브라우저로 전송
+## Content Type 설정
 
-- 스프링 부트에서 주로 사용되는 템플릿 엔진으로는 Thymeleaf, Freemarker, Mustache 등이 있다.
-
-### API
-
-- API(Application Programming Interface)는 애플리케이션 간의 통신을 위한 인터페이스. 웹 개발에서 API는 주로 데이터를 주고받는 방식을 의미한다.
-- 리액트 뷰 등등 쓸때 API로 내려주면 클라이언트가 알아서 화면을 그리는 방식 서버끼리 통신할때도 보통 API 방식(세밀하게 보면 아닐수도 있긴함)
-
-#### JSON
-
-- Key-Value 쌍으로 구성된 데이터 포맷이다.
-- 가독성이 좋고 다양한 프로그래밍 언어에서 쉽게 파싱할 수 있다.
-- XML에 비해 경량화되어 있어 데이터 전송에 효율적이다.
-- 객체를 return 하고 @ResponseBody를 사용하면 json을 반환하는게 기본이다.(XML로 세팅 가능하긴하다.)
-
-#### @ResponseBody
-
-예시
-```commandline
-@RestController
-public class ApiController {
-    @GetMapping("/api/hello")
-    public Hello hello(@RequestParam("name") String name) {
-        Hello hello = new Hello();
-        hello.setName(name);
-        return hello;
-    }
-
-    static class Hello {
-        private String name;
-        // getter와 setter 메서드
-    }
-}
+```java
+response.setContentType("text/html")
 ```
-- 작동원리
-  1. 클라이언트에서 HTTP 요청을 보냅다.
-    2. 내장 톰캣 서버가 요청을 받는다.
-    3. 스프링 컨테이너에서 해당 컨트롤러와 메서드를 찾아 실행한다.
-    4. @ResponseBody가 있으면 ViewResolver 대신 HttpMessageConverter가 동작한다.
-    5. 반환 타입에 따라 적절한 Converter 선택
-       - 문자열: StringHttpMessageConverter
-       - 객체: MappingJackson2HttpMessageConverter (JSON 변환)
-    6. 변환된 데이터가 HTTP 응답 본문에 직접 작성되어 클라이언트로 전송됩니다.
 
-#### JavaBean방식 
+* 브라우저에게 전송하는 데이터 타입을 명시
 
-- 객체 지향 프로그래밍을 쉽게 하기 위한 표준화된 클래스 구조
-- 기본 생성자: JavaBean은 파라미터가 없는 기본 생성자를 가져야 합니다. (매개변수 있는 생성자는 있어도 되지만, 기본 생성자가 필수입니다.)
-- JavaBean의 메서드 getter, setter
-- 프로퍼티 방식
-  - 프로퍼티란 객체의 속성 또는 필드를 의미하며, 이 필드에 접근하거나 수정하는 방법을 getter와 setter로 구현. 즉, 프로퍼티 방식은 다음과 같은 형태로 객체의 데이터를 다루는 것을 말한다.
+## 클라이언트-서버 통신 흐름
 
-- Getter 메서드: 객체의 속성 값을 반환하는 메서드.
-- Setter 메서드: 객체의 속성 값을 설정하는 메서드.
-```
-public class Person {
-    private String name;  // 프로퍼티 (속성)
+1. 클라이언트의 HTTP 요청
+2. 톰캣 8080 포트로 요청 수신
+3. HTTP 요청을 파싱하여 ServletRequest 객체 생성
+4. URL 분석 및 담당 서블릿 매핑
+5. 매핑된 서블릿 실행
+6. GET/POST 메서드 호출
+7. 비즈니스 로직 처리
 
-    // Getter 메서드
-    public String getName() {
-        return name;
-    }
+## Tomcat 아키텍처
 
-    // Setter 메서드
-    public void setName(String name) {
-        this.name = name;
-    }
-}
-```
+* **Thread Pool**: 다수의 요청을 동시 처리하기 위한 스레드 집합
+* **계층 구조**:
+* Service: 전체 서비스 컨테이너
+* Engine: 요청 처리 엔진
+* Host: 도메인별 구분
+* Context: 개별 웹 애플리케이션
+* Servlet: 실제 요청 처리 컴포넌트
+
+* **프로토콜 처리**: HTTP/1.1, HTTP/2, AJP 등 지원
+* **서블릿(DispatcherServlet)**:
+
+1. 요청 접수
+2. @RequestMapping 기반 컨트롤러 매핑
+3. 결과 전달
+
+## WAS(Web Application Server)
+
+* 과거: 클라이언트 설치 프로그램 → 업데이트 어려움
+* 현재: 중앙 서버 기반 (Front Controller 패턴)
+
+### Tomcat 주요 설정 파일
+
+1. server.xml: 서버 전체 설정
+2. 서버의 web.xml: 공통 설정
+3. 프로젝트의 web.xml: 개별 설정
+
+### 서블릿 등록 방식 변화
+
+* 과거: web.xml에 직접 등록
+* 현재: 어노테이션 기반
+* @Controller
+* @RequestMapping
+
+## HTTP 프로토콜
+
+### 주요 특징
+
+* 텍스트 기반의 단순한 프로토콜
+* Stateless(무상태)
+* 보완책: 세션과 쿠키
+* 확장 가능한 헤더 구조
+
+### HTTP 메시지 구조
+
+1. Status Line: 프로토콜/상태코드/설명
+2. Header: 메타 정보
+3. 빈 줄: 헤더와 바디 구분
+4. Body: 실제 데이터
+
+### HTTP 메서드
+
+#### GET (읽기)
+
+* 리소스 조회 목적
+* Body 없음
+* Query String으로 데이터 전달
+* 특징: 보안 취약, 공유 용이
+
+#### POST (쓰기)
+
+* 데이터 생성/수정 목적
+* Body에 데이터 포함
+* 크기 제한 없음
+* 특징: 상대적 보안, 공유 어려움
+
+### HTTPS
+
+* HTTP + TLS(암호화) 조합
+* 보안 강화된 프로토콜
