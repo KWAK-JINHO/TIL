@@ -88,3 +88,4 @@
 
 - SELECT * FROM Company WHERE age > 23 AND age < 35;
 - SELECT * FROM Company WHERE age BETWEEN 23 AND 35;
+
