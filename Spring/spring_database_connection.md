@@ -11,7 +11,7 @@
 - DB정보가 변경될때마다 다시 수정 및 컴파일 해야함
 - 여러 환경에서의 설정관리 어려움
 
-# 2. XML 설정
+# 2. XML 설정
 
 Spring설정 파일 (root-context.xml)에 DB의 URL, 사용자 이름, 비밀번호를 명시한다.
 -> 스프링이 관리한다
@@ -29,4 +29,3 @@ DI를 통해 자동으로 DataSource 주입. (원래 Test는 스프링과 독립
 스프링 테스트 환경 설정을 위해 @RunWith, @ContextConfigration 두가지 어노테이션 사용
 
 <img src="./img/con1.png"  width="50%" height="20%"/>
-DI를 활용해 SPring

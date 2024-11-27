@@ -355,3 +355,46 @@ App(공유) > session(개별); 서버부담 높다, 잠깐 썻다가 지우는�
 ### @RequestParam
 
 - 요청의 파라미터를 연결할 매개변수에 붙이는 애너테이션, 생략가능
+
+# Spring MVC의 데이터 바인딩과 어노테이션
+
+## 입력값 자동 바인딩
+
+입력되는 값이 year, month, day인데 전혀 관계 없는 타입의 MyDate를 선언해도 이걸 알아서 넣어주는 원리:
+
+1. 요청한 값들이 HashMap으로 들어온다.
+2. MyDate라는 타입이 있을 때 bind()메서드가 Map하고 연결해준다.
+    - 타입으로 넘어온 클래스 정보를 가지고 객체를 만든다.
+    - MyDate 인스턴스의 setter를 호출해서, Map의 값으로 MyDate 초기화
+        - MyDate 모든 인스턴스 변수 돌면서 Map에 존재하는지 찾는다.
+        - 찾으면 찾은 값을 setter로 객체에 저장
+        - setter가 없으면 스프링이 자동으로 처리해주지 못한다. setter는 필수!
+
+## ModelAttribute
+
+- 적용대상을 Model의 속성으로 자동 추가해주는 어노테이션
+- public String main(@ModelAttribute MyDate date, Model m) 이렇게 쓰면 Model Map에 MyDate를 키로 자동 저장
+- 수동으로 안써주면 첫글자 소문자로 바꿔서 키에 넣음
+- 반환타입과 controller 메서드의 매개변수에 붙일 수 있음
+
+## 컨트롤러의 매개변수 어노테이션
+
+1. @RequestParam
+    - 기본형, String일 때 생략 가능
+    - view에서 바로 ${param.파라미터이름} 이렇게 참조 가능해서 model에 저장 불필요
+    - 단순한 값, 단일 파라미터를 받을 때 주로 사용
+
+2. @ModelAttribute
+    - 참조형일 때 생략 가능
+    - 여러 매개변수를 객체로 묶어서 받을 때 사용
+    - 폼 데이터가 객체의 프로퍼티와 일치할 때 자동 매핑
+
+## WebDataBinder
+
+- 브라우저 요청값이 실제 객체에 binding될 때 중간 역할
+- 쿼리스트링(year=2021&month=10&day=1)이 Map의 value 값으로 들어감
+- Value가 String이고 MyDate에 타입이 int일 때:
+    - 타입 변환 및 데이터 검증 수행
+    - 변환/검증 결과를 BindingResult에 저장
+    - BindingResult를 컨트롤러에 전달 가능
+    - BindingResult 매개변수는 바인딩할 매개변수 바로 뒤에 위치해야 함
