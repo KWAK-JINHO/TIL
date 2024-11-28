@@ -398,3 +398,52 @@ App(공유) > session(개별); 서버부담 높다, 잠깐 썻다가 지우는�
     - 변환/검증 결과를 BindingResult에 저장
     - BindingResult를 컨트롤러에 전달 가능
     - BindingResult 매개변수는 바인딩할 매개변수 바로 뒤에 위치해야 함
+
+# 스프링 회원가입 화면 구현 TIL
+
+## 스프링 컨텍스트 설정
+
+스프링에서는 두 가지 주요 설정 파일이 있습니다:
+
+- **servlet-context**: 웹 관련 설정을 담당하는 설정 파일
+- **root-context**: 웹과 관련되지 않은 설정을 담당하는 설정 파일
+
+### 정적 리소스 설정
+
+resources 경로 설정을 제거하면, 정적 리소스를 불러올 때 resources 경로를 명시하지 않아도 됩니다.
+
+## Form 구현
+
+Form은 사용자로부터 데이터를 입력받기 위한 HTML 요소입니다. submit 이벤트가 발생하면 form의 내용이 지정된 주소로 전달됩니다.
+
+### Form 예시
+
+```html
+
+<Form action="<c:url value="/register/save"/>" method="POST" onsubmit="return formCheck(this)">
+```
+
+### Form 속성 설명
+
+- **action**: 폼 데이터를 전송할 URL을 지정
+    - 미지정시 현재 URL로 전송됨 (default)
+- **method**: HTTP 요청 메서드 지정
+    - default: GET
+- **autofocus**: 페이지 로드시 해당 요소에 자동으로 포커스
+- **c:url 태그**:
+    - context root 자동 추가
+    - session id 자동 추가 기능
+
+## 컨트롤러 매핑
+
+### RequestMapping
+
+`@RequestMapping`의 value 속성을 통해 URL 매핑을 수행합니다.
+
+## Redirect vs Forward
+
+### Redirect (302)
+
+- HTTP 상태코드 302 응답
+- 응답 body가 없음
+- Location 헤더의 URL을 브라우저가 자동으로 새로 요청
