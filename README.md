@@ -1,6 +1,6 @@
 # Today I Learned
 
-while(alive) do();
+while(alive) {learn();}
 
 ### 작성 규칙
 
