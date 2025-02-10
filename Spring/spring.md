@@ -1,126 +1,186 @@
-# HTTP와 웹 애플리케이션의 동작 원리
+# Spring Summary
 
-## 기본 요청 처리 흐름
+# Spring 애플리케이션의 기본 구조
 
-1. 클라이언트가 URL 요청
-2. Tomcat이 요청을 받고 HttpServletRequest 객체 생성
-3. 요청 받은 정보를 객체에 담음
-4. main 메서드 매개변수로 전달 (HttpServletRequest request)
-5. request 객체를 통해 요청 정보 접근 가능
+## 원격 프로그램 등록 & 연결
 
-## Spring MVC 기본 어노테이션
+• @Controller → Spring에게 **이 클래스가 웹 요청을 처리하는 컨트롤러임을 알림**
+• @RequestMapping(URL, method = GET/POST) → 특정 URL과 메서드를 매핑
 
-* `@Controller`: 해당 클래스가 웹 요청을 처리하는 컨트롤러임을 명시
-* `@RequestMapping`: URL 경로와 처리 메서드를 매핑
+## Spring 컨트롤러의 메서드 실행 과정
 
-## 요청 처리 과정
+- 컨트롤러 인스턴스 메서드는 톰켓이 대신 객체를 생성하고 메서드를 호출하기 때문에 객체 생성 없이 사용 가능
+- **📌 왜 인스턴스 메서드로 만들까?**
+- **인스턴스 메서드**는 **클래스 변수(CV), 인스턴스 변수(IV) 모두 사용 가능**하기 때문.
+- static 메서드는 **클래스 변수(CV)만 사용 가능**하므로 제한적임.
+- Spring MVC에서는 **컨트롤러를 싱글턴 빈으로 등록**하고, **톰캣이 객체를 생성하여 사용**하기 때문에 **static이 필요 없음**.
 
-1. 메인 메서드 호출 및 매개변수 전달
-2. 비즈니스 로직 처리
-3. 결과 출력 (response 객체의 출력 스트림 사용)
+## Spring 컨트롤러의 메서드는 private로 변경해도 호출 가능한가?
 
-* **스트림**: 데이터 흐름을 처리하는 통로
+- 가능하지만 public이 권장된다.
 
-## Content Type 설정
+- **Spring이 Reflection API를 사용하여 private 메서드라도 호출 가능하게 함.**
+- Reflection API는 **클래스의 정보를 런타임에 가져와서 조작할 수 있는 기능**을 제공함.
 
-```java
-response.setContentType("text/html")
+## **Spring MVC의 요청 처리 과정**
+
+- 1️⃣ **클라이언트가 URL 요청 (**/hello**)**
+- 2️⃣ **Tomcat이 요청을 받고** HttpServletRequest **객체 생성**
+- 3️⃣ **요청 정보를** request **객체에 담음**
+- 4️⃣ **Spring DispatcherServlet이 컨트롤러 메서드를 찾아 매핑**
+- 5️⃣ **컨트롤러 메서드의 매개변수(**HttpServletRequest request**)에** request **객체를 전달**
+- 6️⃣ **컨트롤러가 데이터를 처리한 후 결과를 반환**
+- 7️⃣ **Spring의 ViewResolver가 해당 뷰를 찾아 클라이언트에게 응답**
+
+## HttpServletResponse를 이용한 응답 처리
+
+**📌 Response 객체의 역할**
+
+- 클라이언트에게 **응답을 보내는 역할**을 함.
+- setContentType("text/html")을 호출해야 브라우저가 응답을 올바르게 해석 가능.
+
+### 바이너리 파일 vs 텍스트 파일
+
+- 바이너리 파일: 문자와 숫자 저장
+- 텍스트 파일: 문자만 저장, 숫자는 문자로 변환
+
+# Spring MVC의 기본 구성
+
+- Spring MVC는 **입력(DispatcherServlet) → 처리(Service) → 출력(View)** 흐름으로 동작함.
+
+## 입력 (DispatcherServlet)
+
+- **DispatcherServlet**은 사용자의 HTTP 요청을 받아 컨트롤러로 전달하는 역할
+
+```
+// 매개변수 처리의 진화 과정
+public void main(HttpServletRequest request) { }  // 원시적인 방식
+
+public void main(@RequestParam String year) { }  // 요청 데이터를 직접 받음
+
+public void main(@RequestParam int year, @RequestParam int month, @RequestParam int day) { }  // 여러 개의 데이터 처리
+
+public void main(@ModelAttribute MyData myData) { }  // 객체 바인딩
 ```
 
-* 브라우저에게 전송하는 데이터 타입을 명시
+- 요청 데이터를 객체로 받을 수 있도록 발전하여, @ModelAttribute**를 이용해 편리하게 데이터 바인딩 가능**
 
-## 클라이언트-서버 통신 흐름
+## 처리 (Service & Model)
 
-1. 클라이언트의 HTTP 요청
-2. 톰캣 8080 포트로 요청 수신
-3. HTTP 요청을 파싱하여 ServletRequest 객체 생성
-4. URL 분석 및 담당 서블릿 매핑
-5. 매핑된 서블릿 실행
-6. GET/POST 메서드 호출
-7. 비즈니스 로직 처리
+- Model을 이용한 데이터 처리
 
-## Tomcat 아키텍처
+```
+@Controller
+public class MyController {
 
-* **Thread Pool**: 다수의 요청을 동시 처리하기 위한 스레드 집합
-* **계층 구조**:
-* Service: 전체 서비스 컨테이너
-* Engine: 요청 처리 엔진
-* Host: 도메인별 구분
-* Context: 개별 웹 애플리케이션
-* Servlet: 실제 요청 처리 컴포넌트
+    @RequestMapping("/process")
+    public String process(@RequestParam String name, Model model) {
+        String message = "Hello, " + name + "!";
+        model.addAttribute("msg", message);  // Model에 데이터 저장
+        return "result";  // View 이름 반환
+    }
+}
+```
 
-* **프로토콜 처리**: HTTP/1.1, HTTP/2, AJP 등 지원
-* **서블릿(DispatcherServlet)**:
+## 출력(View)
 
-1. 요청 접수
-2. @RequestMapping 기반 컨트롤러 매핑
-3. 결과 전달
+- **DispatcherServlet이 View로 데이터를 전달하여 최종 출력**
 
-## WAS(Web Application Server)
+## ModelAndView
 
-* 과거: 클라이언트 설치 프로그램 → 업데이트 어려움
-* 현재: 중앙 서버 기반 (Front Controller 패턴)
+**모델과 뷰를 하나로 합친 개념**
 
-### Tomcat 주요 설정 파일
+- **DispatcherServlet이 Model을 View로 전달하는 구조**
+- 최근에는 거의 사용되지 않는다
 
-1. server.xml: 서버 전체 설정
-2. 서버의 web.xml: 공통 설정
-3. 프로젝트의 web.xml: 개별 설정
+💡 **오해하면 안 되는 점!**
 
-### 서블릿 등록 방식 변화
+👉 사용자의 입력값을 Model이 직접 받는 것이 아님!
 
-* 과거: web.xml에 직접 등록
-* 현재: 어노테이션 기반
-* @Controller
-* @RequestMapping
+👉 사용자의 입력값을 @RequestParam, @ModelAttribute 등이 받고, **Model은 단순히 데이터를 View로 전달하는 역할**
 
-## HTTP 프로토콜
+## **Reflection API**
 
-### 주요 특징
+**런타임에 동적으로 클래스, 메서드, 필드에 접근하고 수정할 수 있음**
 
-* 텍스트 기반의 단순한 프로토콜
-* Stateless(무상태)
-* 보완책: 세션과 쿠키
-* 확장 가능한 헤더 구조
+- Spring은 **Reflection API를 활용해 빈을 생성하고, private 메서드도 호출 가능**
+- **객체지향 원칙을 훼손할 수 있으므로 꼭 필요할 때만 사용해야 함**
 
-### HTTP 메시지 구조
+## ViewResolver
 
-1. Status Line: 프로토콜/상태코드/설명
-2. Header: 메타 정보
-3. 빈 줄: 헤더와 바디 구분
-4. Body: 실제 데이터
+**컨트롤러에서 반환한 논리적 뷰 이름을 실제 물리적 뷰 경로로 변환**
 
-### HTTP 메서드
+예시)
 
-#### GET (읽기)
+```
+@Controller
+public class MyController {
+    @RequestMapping("/home")
+    public String home() {
+        return "home";  // 실제 파일: "/WEB-INF/views/home.jsp"
+    }
+}
+```
 
-* 리소스 조회 목적
-* Body 없음
-* Query String으로 데이터 전달
-* 특징: 보안 취약, 공유 용이
+# 데이터 저장소
 
-#### POST (쓰기)
+각 저장소는 Map 구조를 사용하며, 범위와 생명주기에 따라 다르다.
 
-* 데이터 생성/수정 목적
-* Body에 데이터 포함
-* 크기 제한 없음
-* 특징: 상대적 보안, 공유 어려움
+| 저장소          | 접근 범위       | 생존 기간     | 설명                        |
+|--------------|-------------|:----------|---------------------------|
+| pageContetxt | 현재 페이지      | 요청 완료 시   | 페이지 내에서만 사용 가능 (초기화됨)     |
+| request      | 요청 간        | 요청 완료 시   | 요청이 끝나면 삭제된다.(주로 사용)      |
+| session      | 사용자별 저장     | 브라우저 종료 시 | 쿠키 기반 사용자 정보 저장(서버 부담 크다) |
+| application  | 웹 애플리케이션 전체 | 서버 종료 시   | 전역적으로 공유(보안문제 주의)         |
 
-### HTTPS
+# 서블릿
 
-* HTTP + TLS(암호화) 조합
-* 보안 강화된 프로토콜
+## Servlet
 
-- form 태그를 써야하는데 Post man이라는 확장프로그램으로 반복적인 요청을 테스트 할때 편함
+- 서블릿은 Java 기반으로 웹 요청(HTTP)을 처리하기 위해 만들어진 자바 클래스
+- Servlet API를 통해 웹 컨테이너(톰켓)상에서 동작하며, HTTP요청을받아 필요한 비즈니스 로직을 수행하고 결과를 HTTP 응답의 형태로 되돌려주는 역할을 한다.
+- 서블릿은 싱글톤으로 관리되며, 최초 요청 시 생성된다.(싱글톤 구조이기 때문에 요청이 많아도 새로운 인스턴스 만들지 않는다. )
 
-## 텍스트파일과 바이너리파일
+### Servlet의 life Cycle
 
-바이너리파일: 문자와 숫자가 저장되어 있는파일
-쓰기, 읽기 모두 문자는 문자로 숫자는 숫자로 인식
+1. 클라이언트의 요청
+2. 톰켓이 Servlet Context에서 서블릿 객체가 존재하는지 확인
+3. 없다면 Servlet 클래스를 로딩 -> init() -> service() / 있다면 바로 service()
+4. 클라이언트에게 응답 반환
 
-텍스트 파일: 문자만 있는 저장되어 있는 파일 ->  읽기 쉽다
-쓰기: 문자는 문자 숫자는 문자로 쓴다.
-읽기: 문자는 문자
+### 서블릿은 싱글톤이지만 멀티스레드를 지원한다!
+
+- 서블릿내에 인스턴스 변수가 없기 때문에 싱글톤이여도 괜찮음. 전부 로컬변수 이기 때문에.
+
+참고내용)
+
+👉DispatcherServlet: 내부적으로 HttpServlet을 상속받은 서블릿
+
+👉Servlet-Context: 서블릿 컨테이너의 전역 설정과 데이터 저장을 담당하는 객체
+
+## 서블릿 URL 매핑 및 등록 방식 정리
+
+### **URL 매핑 방식 (@WebServlet)**
+
+1. exact mapping : 특정 URL과 정확히 일치해야 서블릿이 실행된다.
+2. path mapping :  특정 패턴을 포함하는 URL과 매핑 가능 ( / * 사용 )
+3. extension mapping : 특정 확장자를 가진 URL과 매핑 ( * .do -> test.do 등의 URL 처리)
+4. 디폴트: 모든 요청을 특정 서블릿으로 전달하는 매핑 ( / * : 모든 요청을 이 서블릿에서 처리)
+
+## JSP
+
+자바 서버 페이지(HTML안에 자바 코드가 있다) = 서블릿(자바 코드 안에 HTML)으로 자동으로 변환된다
+
+- JSP페이지는 따로 맵핑해줄 필요가 없다. 자동으로 맵핑됨
+- JSP페이지 호출만 해주면 된다.
+
+---
+
+---
+수정중
+---
+
+---
 
 ## MIME
 
