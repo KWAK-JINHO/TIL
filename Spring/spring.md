@@ -4,8 +4,8 @@
 
 ## 원격 프로그램 등록 & 연결
 
-• @Controller → Spring에게 **이 클래스가 웹 요청을 처리하는 컨트롤러임을 알림**
-• @RequestMapping(URL, method = GET/POST) → 특정 URL과 메서드를 매핑
+- @Controller → Spring에게 **이 클래스가 웹 요청을 처리하는 컨트롤러임을 알림**
+- @RequestMapping(URL, method = GET/POST) → 특정 URL과 메서드를 매핑
 
 ## Spring 컨트롤러의 메서드 실행 과정
 
@@ -18,7 +18,6 @@
 ## Spring 컨트롤러의 메서드는 private로 변경해도 호출 가능한가?
 
 - 가능하지만 public이 권장된다.
-
 - **Spring이 Reflection API를 사용하여 private 메서드라도 호출 가능하게 함.**
 - Reflection API는 **클래스의 정보를 런타임에 가져와서 조작할 수 있는 기능**을 제공함.
 
@@ -39,14 +38,40 @@
 - 클라이언트에게 **응답을 보내는 역할**을 함.
 - setContentType("text/html")을 호출해야 브라우저가 응답을 올바르게 해석 가능.
 
+### MIME
+
+- 텍스트 기반 프로토콜에 바이너리 데이터 전송하기 위해서 고안되었다.
+
+많이 사용되는 타입 예시)
+
+| **타입**      | **설명**          | **MIME타입 예시(타입/서브타입)**                                                                                                            |
+|-------------|-----------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| text        | 텍스트를 포함하는 모든 문서 | text/plain, text/html, text/css, text/javascript                                                                                  |
+| image       | 모든 종류의 이미지      | image/bmp, image/webp                                                                                                             |
+| audio       | 모든 종류의 오디오 파일   | audio/midi, audio/mpeg,audio/webm, audio/ogg,audio/wav                                                                            |
+| video       | 모든 종류의 비디오 파일   | video/webm, video/ogg                                                                                                             |
+| application | 모든 종류의 이진 데이터   | application/octetstream,application/pkcs12, application/vnd.mspowerpoint, application/xhtml+xml, application/xml, application/pdf |
+|             |                 |                                                                                                                                   |
+
+### Base64
+
+Base64는 바이너리 데이터를 문자 데이터(ASCII)로 변환하는 인코딩 방식
+
+- 2진법 = base2 = 0, 1
+- 10진법 = base10 = 0~9
+- **16진법 (Base16, Hex)** → 0 ~ 9, A ~ F
+- 64진법 = A~Z, a-z, 0~9, +, / ⇒ 모두 64개(6bit)의 문자로 구성
+
+HTML 링크가 있어서 편하지만 링크가 깨지기 쉽다. 하지만 HTML에 글자로 다 박으면 안깨지긴한다.
+
 ### 바이너리 파일 vs 텍스트 파일
 
 - 바이너리 파일: 문자와 숫자 저장
 - 텍스트 파일: 문자만 저장, 숫자는 문자로 변환
 
-# Spring MVC의 기본 구성
+# Spring MVC
 
-- Spring MVC는 **입력(DispatcherServlet) → 처리(Service) → 출력(View)** 흐름으로 동작함.
+Spring MVC는 **입력(DispatcherServlet) → 처리(Service) → 출력(View)** 흐름으로 동작함.
 
 ## 입력 (DispatcherServlet)
 
@@ -122,7 +147,7 @@ public class MyController {
 }
 ```
 
-# 데이터 저장소
+## 데이터 저장소
 
 각 저장소는 Map 구조를 사용하며, 범위와 생명주기에 따라 다르다.
 
@@ -132,8 +157,87 @@ public class MyController {
 | request      | 요청 간        | 요청 완료 시   | 요청이 끝나면 삭제된다.(주로 사용)      |
 | session      | 사용자별 저장     | 브라우저 종료 시 | 쿠키 기반 사용자 정보 저장(서버 부담 크다) |
 | application  | 웹 애플리케이션 전체 | 서버 종료 시   | 전역적으로 공유(보안문제 주의)         |
+|              |             |           |                           |
+
+# 요청과 응답
+
+## 클라이언트와 서버의 통신 과정
+
+1.클라이언트의 요청
+
+- 클라이언트가 HTTP 요청을 보냄
+- 요청은 서버의 8080 포트로 전달됨
+- 프로토콜 지정 (HTTP/1.1, HTTP/2, AJP 등)
+
+2.톰켓(WAS)의 요청 접수
+
+- 톰캣의 Thread Pool이 요청을 접수
+- Thread Pool: 다수의 스레드를 미리 생성하여 요청 처리를 분담
+- 들어온 HTTP 요청을 ServletRequest 객체로 변환
+
+3.요청 라우팅
+
+- URL 분석 수행
+- 적절한 서블릿으로 매핑
+- 요청 처리할 서블릿 결정
+
+📌 톰켓의 구조
+
+- Service → Engine → Host → Context → Servlet 계층 구조
+
+📌 서블릿의 처리
+
+- DispatcherServlet이 요청 수신
+- HTTP 메서드(GET/POST)에 따른 처리
+- @RequestMapping이 된 컨트롤러 메서드 호출
+- 비즈니스 로직 실행
+- 처리 결과를 클라이언트에게 반환
+
+<img src="./img/con4.png"  width="70%" height="20%"/>
+
+### 톰캣 내부구조
+
+- Connection Pool에서 요청당 하나씩 쓰레드 할당 -> Thread per Request
+- 가상 스레드: I/O 블로킹 상황 처리
+    - I/O 블로킹은 사용자 입력할 때 자주 발생 (예: 통신 프로그램)
+    - 가상 스레드로 효율적 처리
+- 프로그램 그룹 -> 프로젝트(Context)에 Connector 연결
+- Servlet: 아래에서 설명
+
+## WebDataBinder
+
+- 브라우저를 통해서 요청받은 값이 실제 객체에 binding될 때 중간 역할을 해준다.
+
+<img src="./img/con5.png"  width="70%" height="20%"/>
+위와 같은 경우에
+year=2021&month=10&day=1 이렇게 되어 있을때
+`@ModelAttribute` 을 쓰면 쿼리스트링 뒤에 데이터가 Map의 value 값으로 들어간다.
+`@RequestParam`, `@RequestMapping` 도 마찬가지로 WebDataBinder를 사용하여 매핑.
+
+### @ModelAttribute
+
+- 적용대상을 Model의 속성으로 자동 추가해주는 어노테이션
+
+`public String main(@ModelAttribute Mydate date, Model m)`
+
+이렇게 쓰면 Model Map에 MyDate를 키로 자동 저장한다. 수동으로 안써주면 첫글자를 소문자로 바꿔서 키에 넣는다
+
+### @RequestParam
+
+- 기본형, String일(단일 파라미터) 때 생략 되어 있다고 생각하면 된다.
+- view에서 바로 ${param.파라미터이름} 이렇게 참조가 가능하기 때문에 model에 저장이 필요 없다.
+
+### @RequestMapping
+
+- 내부적으로 WebDataBinder를 활용하여 요청 데이터를 컨트롤러의 매개변수에 매핑하며, 단순히 URL을 매핑하는 역할
+
+### @RequestBody
+
+- **HTTP 본문(JSON 등)을 객체로 변환**하는 역할을 하며, WebDataBinder 대신 HttpMessageConverter를 사용
 
 # 서블릿
+
+#서블릿
 
 ## Servlet
 
@@ -143,19 +247,17 @@ public class MyController {
 
 ### Servlet의 life Cycle
 
-1. 클라이언트의 요청
-2. 톰켓이 Servlet Context에서 서블릿 객체가 존재하는지 확인
-3. 없다면 Servlet 클래스를 로딩 -> init() -> service() / 있다면 바로 service()
-4. 클라이언트에게 응답 반환
+2. 클라이언트의 요청
+3. 톰켓이 Servlet Context에서 서블릿 객체가 존재하는지 확인
+4. 없다면 Servlet 클래스를 로딩 -> init() -> service() / 있다면 바로 service()
+5. 클라이언트에게 응답 반환
 
 ### 서블릿은 싱글톤이지만 멀티스레드를 지원한다!
 
 - 서블릿내에 인스턴스 변수가 없기 때문에 싱글톤이여도 괜찮음. 전부 로컬변수 이기 때문에.
 
 참고내용)
-
-👉DispatcherServlet: 내부적으로 HttpServlet을 상속받은 서블릿
-
+👉DispatcherServlet: 내부적으로 HttpServlet을 상속받은 서블릿.
 👉Servlet-Context: 서블릿 컨테이너의 전역 설정과 데이터 저장을 담당하는 객체
 
 ## 서블릿 URL 매핑 및 등록 방식 정리
@@ -177,33 +279,14 @@ public class MyController {
 ---
 
 ---
+
+---
 수정중
 ---
 
 ---
 
-## MIME
-
-- 텍스트 기반 프로토콜에 바이너리 데이터 전송하기 위해서 고안함
-- 전송할 데이터의 타입을 적어주면 된다.
-
-| **타입**      | **설명**          | **MIME타입 예시(타입/서브타입)**                                                                                                            |
-|-------------|-----------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| text        | 텍스트를 포함하는 모든 문서 | text/plain, text/html, text/css, text/javascript                                                                                  |
-| image       | 모든 종류의 이미지      | image/bmp, image/webp                                                                                                             |
-| audio       | 모든 종류의 오디오 파일   | audio/midi, audio/mpeg,audio/webm, audio/ogg,audio/wav                                                                            |
-| video       | 모든 종류의 비디오 파일   | video/webm, video/ogg                                                                                                             |
-| application | 모든 종류의 이진 데이터   | application/octetstream,application/pkcs12, application/vnd.mspowerpoint, application/xhtml+xml, application/xml, application/pdf |
-|             |                 |                                                                                                                                   |
-
-## Base64
-
-2진법 = base2 = 0, 1
-10진법 = base10 = 0~9
-16진법 = base16 = 0~9 ABCDEF
-64진법 = A~Z, a-z, 0~9, +, / ⇒ 모두 64개(6 bit)의 문자로 구성
-
-HTML 링크가 있어서 편하지만 링크가 깨지기 쉽다. 하지만 HTML에 글자로 다 박으면 안깨짐
+---
 
 ### 바이너리 데이터를 텍스트 기반인 HTTP 프로토콜로 보내는 방법
 
