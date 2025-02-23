@@ -6,7 +6,7 @@ while ( alive ) { learn ( ) ; }
 1. I record what I learn every day.
 2. I summarize and organize with my current knowledge.
 3. I keep my notes updated as I learn more.
-4. If needed, I write in detail on my blog.
+4. If needed, I write in detail on my [blog](https://[yourbloglink](https://velog.io/@letsmake/posts).com).
 
 ## Category
 
