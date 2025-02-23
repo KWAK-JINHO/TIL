@@ -3,4 +3,4 @@
 while(alive) {learn();}
 
 ### Java
-[test](java_collections_framework.md)
+[test](./Java/java_collections_framework.md)
