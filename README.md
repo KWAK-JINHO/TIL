@@ -1,12 +1,54 @@
 # Today I Learned
 
-while(alive) {learn();}
+while ( alive ) { learn ( ) ; }
 
-### 작성 규칙
+## Rules
+1. I record what I learn every day.
+2. I summarize and organize with my current knowledge.
+3. I keep my notes updated as I learn more.
+4. If needed, I write in detail on my [blog](https://velog.io/@letsmake/posts).
 
-- 폴더와 파일명은 영문으로 작성한다.
-- 다시 볼 때 찾기 쉽게 자세하게 기록하자!
+## Category
 
-### 12월 목표
+### ☕ Java
+- [java_concepts](./Java/java_concepts.md.md)
+- [collections_framework](./Java/java_collections_framework.md)
+- [jvm_memory_structure](./Java/jvm_memory_structure.md)
 
-- 이제까지 배웠던 자바, DB모델링, SQL, SQL튜닝, 디자인패턴, 스프링 등등 첫 프로젝트에서 복습 및 적용 해보자!
+### Spring
+- [spring](./Spring/spring.md)
+- [springboot](./Spring/springboot.md)
+- [jpa](./Spring/jpa.md)
+- [spring_database_connection](./Spring/spring_database_connection.md)
+
+### Object-Oriented Programmin
+- [객체지향의 사실과 오해 요약 및 정리](./Oop/oop_introduction_with_misunderstandings_and_realities.md.md)
+- [oop_summary](./Oop/oop_summary.md.md)
+
+### OperatingSystem
+- [operating_systems_01](./OperatingSystem/operating_systems_01.md)
+- [process_and_thread](./OperatingSystem/process_and_thread.md)
+- [thread](./OperatingSystem/thread.md)
+- [virtual_thread](./OperatingSystem/virtual_thread.md)
+
+### Networking
+- [RestfulAPI](./Networking/HTTP/RestfulAPI.md)
+- [network](./Networking/network.md)
+
+### SystemDesign
+- [data_centric_application_design](./SystemDesign/data_centric_application_design.md)
+
+### Database
+- [data_modeling](./Database/data_modeling.md)
+- [mysql](./Database/mysql.md)
+- [sql](./Database/sql.md)
+- [sql_tuning](./Database/sql_tuning.md)
+
+### DesignPattern
+- [factory_method](./DesignPattern/factory_method.md)
+- [flyweight](./DesignPattern/flyweight.md)
+- [prototype](./DesignPattern/prototype.md)
+- [singleton_pattern](./DesignPattern/singleton_pattern.md)
+
+### Tools
+- [gradle_recognition_issue](./Tools/gradle_recognition_issue.md)
