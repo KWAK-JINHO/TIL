@@ -1,3 +1,97 @@
+# Querydsl
+
+SQL 형식의 쿼리를 Type Safe하게 생성할 수 있도록 하는 DSL을 제공하는 라이브러리
+
+# Qclass
+
+엔티티 클래스 속성과 구조를 설명해주는 메타데이터
+Type Safe하게 쿼리 조건 설정 가능
+
+## QClass 생성 위치 지정
+
+```
+def generated = 'build/generated/sources/annotationProcessor/java/main'  
+  
+tasks.withType(JavaCompile).configureEach {  
+    options.getGeneratedSourceOutputDirectory().set(file(generated))  
+}  
+  
+clean {  
+    delete file(generated)  
+}
+```
+
+본인의 IDE 세팅마다 생성 위치가 달라질수 있어 협업시에 위와같이 build.grage 파일에 위치를 지정해주는게 좋다.
+build 디렉토리안에 두면 자동으로 git에 올라가지 않는다는 장점이 있다.
+
+# JPAQueryFactory 빈 등록
+
+```
+@Configuration  
+public class QuerydslConfig {  
+    @PersistenceContext  
+    private EntityManager entityManager;  
+  
+    @Bean  
+    public JPAQueryFactory jpaQueryFactory() {  
+        return new JPAQueryFactory(entityManager);  
+    }  
+}
+```
+
+위와 같이 Jpa를 통해 엔티티를 조회하기 때문에 entity매니저가 필요하고 빈으로 등록한다.
+
+# 서브쿼리 작성
+
+QueryDSL에서 서브쿼리를 작성할 때는 `JPAExpressions`를 사용합니다.
+
+- **JPAQuery**
+    - 일반적인 쿼리 생성에 사용
+    - 사용 범위가 넓고 다양한 메소드 지원
+    - 주로 메인 쿼리 작성에 사용
+- **JPAExpressions**
+    - 유틸리티성 클래스로 설계됨
+    - 다양한 select 메소드 지원
+    - 서브쿼리 작성에 특화됨
+    - 사용 방법이 더 간결하고 명확함
+
+```java
+// 서브쿼리 예시
+JPQLQuery<Long> subQuery = JPAExpressions
+                .select(reviewProduct.product.id)
+                .from(reviewProduct)
+                .where(ratingBuilder);
+
+// 메인 쿼리에서 서브쿼리 사용
+builder.
+
+and(product.id.in(subQuery));
+```
+
+# 동적 정렬 (OrderSpecifier)
+
+OrderSpecifier는 QueryDSL에서 동적인 정렬 조건을 생성할 때 사용합니다.
+
+## 기본 구성
+
+- 매개변수:
+    - 첫 번째: `Order.ASC` 또는 `Order.DESC` (정렬 방향)
+    - 두 번째: 정렬 기준이 되는 QClass 필드 (target)
+
+## 다중 정렬
+
+- `OrderSpecifier[]` 배열을 사용하여 여러 정렬 조건을 순차적으로 적용
+- 첫 번째 정렬 조건이 같은 레코드에 대해 두 번째 정렬 조건이 적용됨
+
+## Pageable과의 통합
+
+- Spring Data의 `Pageable`에서 제공하는 `Sort` 객체를 사용하여 동적으로 `OrderSpecifier` 생성 가능
+
+## 주의사항
+
+- 정렬 조건을 설정하지 않으면 `null`이 반환되어 오류 발생 가능
+- 항상 기본 정렬 조건을 설정하는 것이 안전
+
 # 1. extends와 implements 사용하지 않기
 
 보통 queryDsl 사용하면 JpaRepository 와 RespositoryCustom이라는 별도의 인터페이스를 추가 상속받아서 implement로 구현 했었다.
@@ -289,6 +383,8 @@ Gradle 5이상 필요
 
 1.상황에 따라 ORM과 전통적 Query 방식을 골라 사용할 것
 2.JPA와 Querydsl로 발생하는 쿼리 한번 더 확인하기
+3.쿼리가 복잡해지면서(한방 쿼리) 해당 로직들을 서비스에서 풀어내야 하는게 아닌가 고민이 필요하다
 
 참고
 > 향로님의 테코톡 Querydsl 편
+> 테코톡 바론, 블랙캣의 Querydsl with JPA
