@@ -23,8 +23,7 @@ while ( alive ) { learn ( ) ; }
 - [springboot](./Spring/springboot.md)
 - [jpa](./Spring/jpa.md)
 - [spring_database_connection](./Spring/spring_database_connection.md)
--
-    - [spring_batch](./Spring/spring_batch.md)
+- [spring_batch](./Spring/spring_batch.md)
 
 ### Object-Oriented Programmin
 
