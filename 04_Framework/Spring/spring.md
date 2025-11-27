@@ -193,7 +193,7 @@ public class MyController {
 - 비즈니스 로직 실행
 - 처리 결과를 클라이언트에게 반환
 
-<img src="./img/con4.png"  width="70%" height="20%"/>
+<img src="img/con4.png"  width="70%" height="20%"/>
 
 ### 톰캣 내부구조
 
@@ -208,7 +208,7 @@ public class MyController {
 
 - 브라우저를 통해서 요청받은 값이 실제 객체에 binding될 때 중간 역할을 해준다.
 
-<img src="./img/con5.png"  width="70%" height="20%"/>
+<img src="img/con5.png"  width="70%" height="20%"/>
 위와 같은 경우에
 year=2021&month=10&day=1 이렇게 되어 있을때
 `@ModelAttribute` 을 쓰면 쿼리스트링 뒤에 데이터가 Map의 value 값으로 들어간다.

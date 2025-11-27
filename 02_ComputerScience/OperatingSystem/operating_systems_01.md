@@ -53,7 +53,7 @@
     - cpu에 interupte를 걸어서 요청
 - 프로세스관리
 
-<img src="./img/os_01.png"  width="70%" height="70%"/>
+<img src="img/os_01.png"  width="70%" height="70%"/>
 
 - CPU: 항상 메모리와 일한다.
 - Mode bit: 지금 CPU에서 실행되고 있는 것이 운영체제인지 사용자 프로그램인지 체크, 보안목적

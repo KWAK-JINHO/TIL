@@ -3,7 +3,7 @@
 데이터베이스 연결정보를 코드에 직접 작성하는 방식
 -> 개발자가 직접 DriverManager를 관리한다.
 
-<img src="./img/con3.png"  width="70%" height="20%"/>
+<img src="img/con3.png"  width="70%" height="20%"/>
 
 ## 문제점
 
@@ -16,7 +16,7 @@
 Spring설정 파일 (root-context.xml)에 DB의 URL, 사용자 이름, 비밀번호를 명시한다.
 -> 스프링이 관리한다
 
-<img src="./img/con2.png"  width="70%" height="20%"/>
+<img src="img/con2.png"  width="70%" height="20%"/>
 
 ## 문제점
 
@@ -28,4 +28,4 @@ Spring설정 파일 (root-context.xml)에 DB의 URL, 사용자 이름, 비밀번
 DI를 통해 자동으로 DataSource 주입. (원래 Test는 스프링과 독립적으로 실행해야 한다.)
 스프링 테스트 환경 설정을 위해 @RunWith, @ContextConfigration 두가지 어노테이션 사용
 
-<img src="./img/con1.png"  width="50%" height="20%"/>
+<img src="img/con1.png"  width="50%" height="20%"/>
