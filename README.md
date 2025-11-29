@@ -40,6 +40,10 @@
 - [스레드](02_ComputerScience/OperatingSystem/thread.md)
 - [가상 스레드](02_ComputerScience/OperatingSystem/virtual_thread.md)
 
+#### 🔒 Security
+
+- [JWT](02_ComputerScience/Security)
+
 #### 🏗️ SoftwareEngineering
 
 **Object-Oriented Programming**
