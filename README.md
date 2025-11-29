@@ -77,7 +77,7 @@
 #### 🍃 Spring
 
 - [Spring](04_Framework/Spring/spring.md)
-- [Spring Boot](04_Framework/Spring/springboot.md)
+- [Spring Boot](04_Framework/SpringBoot/springboot.md)
 - [JPA](04_Framework/Spring/jpa.md)
 - [Querydsl JPA](04_Framework/Spring/Querydsl_jpa.md)
 - [Spring Database Connection](04_Framework/Spring/spring_database_connection.md)
