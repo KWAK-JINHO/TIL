@@ -11,11 +11,10 @@
 
 ### Spring Boot
 
-- @SpringBootApplicatoin을 사용하면 자동으로 A.C.를 생성하며, 내장 톰켓을 포함하므로 별도 설정이 필요 없다. (SpringApplication.run 실행시 내장톰켓 실행 및 A.C. 생성)
+@SpringBootApplicatoin을 사용하면 자동으로 A.C.를 생성하며, 내장 톰켓을 포함하므로 별도 설정이 필요 없다. (SpringApplication.run 실행시 내장톰켓 실행 및 A.C. 생성)
 
 #### @SpringBootApplicatoin
 
-SpringBootApplicatoin은 아래
 `@Configuration`: Spring의 XML 설정을 Java로 대체, 직접 Bean을 등록할 수 있음
 `@EnableAutoConfiguraion`: Spring Boot가 필요할만한 Bean을 자동등록
 `@ComponentScan`: 패키지 내의 @Component, @Service, @Controller, @Repository 자동 검색 및 등록
@@ -64,7 +63,7 @@ SpringBootApplicatoin은 아래
 - SpringMVC는 XML기반 설정이 일반적이며 @Configuration을 사용해 Java기반 설정도 가능
 - Spring boot는 기본적으로 자동 설정을 사용하며 필요한 설정은 properties, yml을 이용해 설정 변경 가능.
 
-# 📌 요약
+# 요약
 
-👉 Spring Boot는 설정을 Map 처럼 관리하고 자동으로 Bean을 등록한다.
-👉 개발자는 최소한의 설정만 하면 되고, 나머지는 AutoConfiguration이 해결한다.
+- Spring Boot는 설정을 Map 처럼 관리하고 자동으로 Bean을 등록한다.
+- 개발자는 최소한의 설정만 하면 되고, 나머지는 AutoConfiguration이 해결한다.
