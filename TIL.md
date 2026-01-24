@@ -2,11 +2,12 @@
 
 # QueryDSL
 
-위치: [QueryDSL_JPA](04_Framework/Spring/querydsl_jpa.md)
+위치: [QueryDSL_JPA](Framework/Spring/querydsl_jpa.md)
 
 ### 학습하면서 찾아보고 싶었던 내용
 
 - JPA EntityManager가 하는일 (persistence context의 생명주기와 엔티티의 상태변화)
+- FileSort 란?
 
 ### 추가학습할 내용
 

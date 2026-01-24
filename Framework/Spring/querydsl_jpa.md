@@ -11,8 +11,7 @@ Type Safe하게 쿼리 조건 설정 가능
 
 ### QClass 생성 위치 지정
 
-생성위치를 `build/` 디렉토리 하위로 지정함으로써, 별도의 `.gitignore` 설정 없이도 불필요한 QClass가 Git에 포함되는 것을 방지하며 협업 시 위치를
-강제하는 효과가 있다.
+생성위치를 `build/` 디렉토리 하위로 지정함으로써, 별도의 `.gitignore` 설정 없이도 불필요한 QClass가 Git에 포함되는 것을 방지.
 
 ```build.gradle
 def generated = 'build/generated/sources/annotationProcessor/java/main'  

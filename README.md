@@ -13,7 +13,8 @@
 ### 00_ComputerScience
 
 ### 01_Languages
-    - [JVM](01_Languages/Java/JVM.md)
+
+- [JVM](01_Languages/Java/JVM.md)
 
 ### 02_Frameworks
 
