@@ -14,7 +14,7 @@
 
 ### 01_Languages
 
-- [JVM](01_Languages/Java/JVM.md)
+- [JVM](01_Languages/Java/jvm)
 
 ### 02_Frameworks
 

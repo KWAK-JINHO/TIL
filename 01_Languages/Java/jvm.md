@@ -32,7 +32,7 @@ OS에 독립적인 실행환경을 제공(OS로부터 메모리를 할당)하며
 
 - Interpreter: 바이트코드를 한 줄씩 해석
 - JIT(Just-In-Time) 컴파일러: 반복되는 코드(Hot Spot)을 기계어로 컴파일하여 캐싱
-- GC(Garbage Collector): Heap영역의 미사용 객체를 자동 정리 [[ GC 추가 내용은 여기를 참고 ]](./GC.md)
+- GC(Garbage Collector): Heap영역의 미사용 객체를 자동 정리 [[ GC 추가 내용은 여기를 참고 ]](./gc)
 - JNI(Java Native method Interface): OS 고유 기능 및 외부 언어 라이브러리와의 통로
 
 # 3. 런타임 생명주기
