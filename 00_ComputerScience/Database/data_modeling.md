@@ -51,8 +51,7 @@
 
 ## 관계형 데이터 모델 이론
 
-ER모델: 개념적 수준
-관계형 데이터 모델: 논리적 수준
+ER모델: 개념적 수준 관계형 데이터 모델: 논리적 수준
 
 ### 관계형 모델의 키
 
@@ -84,28 +83,27 @@ ER모델: 개념적 수준
 
 도메인은 원자값을 가져야한다.
 
-<img src="./Database/img/제1.png" width="20%" height="20%">
+<img src="../img/제1.png" width="20%" height="20%">
 
 ## 제 2 정규형
 
 부분종속을 제거
 
-<img src="./Database/img/제2.png" width="20%" height="20%">
+<img src="../img/제2.png" width="20%" height="20%">
 
 => 이름은 학번만 알면 조회 가능 -> 테이블을 분리
 
-<img src="./Database/img/2-2.png" width="20%" height="20%">
+<img src="../img/2-2.png" width="20%" height="20%">
 
 ## 제 3 정규형
 
 이행적 함수 종속 제거
 
-<img src="./Database/img/3.png" width="20%" height="20%">
+<img src="../img/3.png" width="20%" height="20%">
 
-학번으로 모두 조회 가능 하지만, 학과 건물은 학과를 알아도 알 수 있다.
-학번 -> 학과 -> 학과 이렇게 이행적인 함수 종속 상태 -> 테이블 분리
+학번으로 모두 조회 가능 하지만, 학과 건물은 학과를 알아도 알 수 있다. 학번 -> 학과 -> 학과 이렇게 이행적인 함수 종속 상태 -> 테이블 분리
 
-<img src="./Database/img/3-2.png" width="20%" height="20%">
+<img src="../img/3-2.png" width="20%" height="20%">
 
 # 데이터 모델링 접근방법
 
