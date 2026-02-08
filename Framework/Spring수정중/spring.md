@@ -193,7 +193,7 @@ public class MyController {
 - 비즈니스 로직 실행
 - 처리 결과를 클라이언트에게 반환
 
-<img src="img/con4.png"  width="70%" height="20%"/>
+<img src="../../02_Frameworks/img/con4.png"  width="70%" height="20%"/>
 
 ### 톰캣 내부구조
 
@@ -208,7 +208,7 @@ public class MyController {
 
 - 브라우저를 통해서 요청받은 값이 실제 객체에 binding될 때 중간 역할을 해준다.
 
-<img src="img/con5.png"  width="70%" height="20%"/>
+<img src="../../02_Frameworks/img/con5.png"  width="70%" height="20%"/>
 위와 같은 경우에
 year=2021&month=10&day=1 이렇게 되어 있을때
 `@ModelAttribute` 을 쓰면 쿼리스트링 뒤에 데이터가 Map의 value 값으로 들어간다.
@@ -255,8 +255,7 @@ year=2021&month=10&day=1 이렇게 되어 있을때
 - 서블릿내에 인스턴스 변수가 없기 때문에 싱글톤이여도 괜찮음. 전부 로컬변수 이기 때문에.
 
 참고내용)
-👉DispatcherServlet: 내부적으로 HttpServlet을 상속받은 서블릿.
-👉Servlet-Context: 서블릿 컨테이너의 전역 설정과 데이터 저장을 담당하는 객체
+👉DispatcherServlet: 내부적으로 HttpServlet을 상속받은 서블릿. 👉Servlet-Context: 서블릿 컨테이너의 전역 설정과 데이터 저장을 담당하는 객체
 
 ## 서블릿 URL 매핑 및 등록 방식 정리
 
@@ -310,8 +309,7 @@ year=2021&month=10&day=1 이렇게 되어 있을때
 
 "세션은 지문인식이라서 쿠키를 들고가면 서버에서 인증 가능" 하다고 생각하면된다.
 ![[스크린샷 2024-12-02 오전 10.50.22.png]]
-브라우저에서 볼 수 있는 이것들은 전부 쿠키임
-위에쿠키는 세션의ID이고 아래쿠키는 로그인 정보(id, pwd)를 담고 있다
+브라우저에서 볼 수 있는 이것들은 전부 쿠키임 위에쿠키는 세션의ID이고 아래쿠키는 로그인 정보(id, pwd)를 담고 있다
 
 ### 쿠키 처리 흐름
 
@@ -425,15 +423,13 @@ Data에 access하기 위한 object(실제로 DB에 접근하는 객체)이다.
 
 ### 의존성이란?
 
-클래스 A 와 클래스 B가 존재할 때 클래스 A안에 클래스 B가 import 되어 있으면 classA는 classB를 의존한다 라고 볼 수 있다.
-의존성 주입이란 클래스 A가 필요한 클래스 B의 객체를 스스로 생성하지 않고, 외부에서 주입받는 방식을 말한다. 이를통해 의존성 역전이 가능해진 것.  (인터페이스(추상화)에 의존하게 됨)
+클래스 A 와 클래스 B가 존재할 때 클래스 A안에 클래스 B가 import 되어 있으면 classA는 classB를 의존한다 라고 볼 수 있다. 의존성 주입이란 클래스 A가 필요한 클래스 B의 객체를 스스로 생성하지 않고, 외부에서 주입받는 방식을 말한다. 이를통해 의존성 역전이 가능해진 것.  (인터페이스(추상화)에 의존하게 됨)
 
 spring은 IoC를 DI로 지원한다
 
 📌 IoC(Inversion of Control)는 객체의 생성과 의존성 관리를 개발자가 아닌 외부 컨테이너에 맡기는 설계 원칙으로 스프링에서 이를 구현한 객체 관리 시스템을 IoC컨테이너라고 부른다.
 
-스프링은 IoC컨테이너(스프링 컨테이너)의 인터페이스로 ApplicationContext를 제공한다.
-ApplicationContext는 BeanFactory(생성정보를 가져옴)를 확장한 인터페이스이다.
+스프링은 IoC컨테이너(스프링 컨테이너)의 인터페이스로 ApplicationContext를 제공한다. ApplicationContext는 BeanFactory(생성정보를 가져옴)를 확장한 인터페이스이다.
 
 #### ApplicationContext의 주요 구현체들
 
@@ -443,36 +439,29 @@ ApplicationContext는 BeanFactory(생성정보를 가져옴)를 확장한 인터
 
 ### 스프링이 의존성 역전을 하기 위한 조건 두가지
 
-1. 내가 사용하는 클래스를 알아야한다
-   어떻게 알까?
+1. 내가 사용하는 클래스를 알아야한다 어떻게 알까?
     - 설정파일 : 등록할 Bean의 범위를 지정한다.
-    - 클래스, 애너테이션 : 등록할 Bean의 대상을 지정한다.
-      spring에서는 `web.xml`을 통해 `DispatcherServlet`이 로드되면, 이 시점에 `ApplicationContext`가 초기화
-      spring boot 에서는 @springbootApplication이 기준이 되어 해당 클래스가 위치한 패키지를 기준으로 하위 패키지를 모두 스캔 후 ApplicationContext를 초기화
+    - 클래스, 애너테이션 : 등록할 Bean의 대상을 지정한다. spring에서는 `web.xml`을 통해 `DispatcherServlet`이 로드되면, 이 시점에
+      `ApplicationContext`가 초기화 spring boot 에서는 @springbootApplication이 기준이 되어 해당 클래스가 위치한 패키지를 기준으로 하위 패키지를 모두 스캔 후 ApplicationContext를 초기화
 
    `@Component`, `@Bean`, XML 설정 을 통해서 빈을 등록.
    (@Configuration, @Bean 수동 등록 / @Component로 자동 등록)
 
-2. 사용할 클래스의 정보를 미리 준비해야 한다.
-   어떻게 미리 준비(Bean을 생성)할까?
+2. 사용할 클래스의 정보를 미리 준비해야 한다. 어떻게 미리 준비(Bean을 생성)할까?
     - AutoWired
     - 설정파일
     - 생성자
-    - setter -> 이젠 안쓰임
-      📌 getBean을 할 때 해당 클래스에 생성정보를 토대로 클래스를 가지고 올 때 만약ApplicationContext에 이미 있으면 바로 쓰고 없으면 위 1번에서의 정보(범위, 어떤게 필요한지)를 토대로
-      생성한다.
+    - setter -> 이젠 안쓰임 📌 getBean을 할 때 해당 클래스에 생성정보를 토대로 클래스를 가지고 올 때 만약ApplicationContext에 이미 있으면 바로 쓰고 없으면 위 1번에서의 정보(범위, 어떤게 필요한지)를 토대로 생성한다.
 
 # Filter (코드 중복과 관리)
 
-전처리부분과 후처리 부분을 앞으로 뺀다(Frilter로) -> 코드가 간결해진다.
-AOP개념이 이와 유사하다.
+전처리부분과 후처리 부분을 앞으로 뺀다(Frilter로) -> 코드가 간결해진다. AOP개념이 이와 유사하다.
 
 ### Filter가 여러개일 때
 
 요청 -> Filter1 / 전처리하고 -> Filter2 / 전처리 후 서블릿 호출 -> 서블릿 처리 -> Filter2 후처리 -> Filter1 후처리
 
-요청과 응답을 처리하는데 사용되는 Java 클래스
-서블릿, JSP로 가기 전에 요청을 가로채거나 응답이 클라이언트로 전달되기 전에 데이터를 수정, 로깅, 인코딩, 인증, 권한체크 하는데 사용
+요청과 응답을 처리하는데 사용되는 Java 클래스 서블릿, JSP로 가기 전에 요청을 가로채거나 응답이 클라이언트로 전달되기 전에 데이터를 수정, 로깅, 인코딩, 인증, 권한체크 하는데 사용
 
 ** 스프링 시큐리티가 이걸 활용한다. **
 
@@ -689,8 +678,7 @@ public class ApiExceptionHandler {
 - **@ResponseStatus**: 상태 코드를 명확히 설정
 - **@RestControllerAdvice**: REST API 전용 예외 처리
 
-@ControllerAdvice는 뷰 기반의 MVC 애플리케이션에서 전역 예외 처리를 지원한다.
-@RestControllerAdvice는 REST API에서 JSON 또는 XML과 같은 응답을 생성하는 데 사용된다.
+@ControllerAdvice는 뷰 기반의 MVC 애플리케이션에서 전역 예외 처리를 지원한다. @RestControllerAdvice는 REST API에서 JSON 또는 XML과 같은 응답을 생성하는 데 사용된다.
 
 
 

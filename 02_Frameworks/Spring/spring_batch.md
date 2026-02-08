@@ -14,14 +14,12 @@ dependencies {
 
 ## 2. 배치 설정 구성
 
-설정 방식 변화
-Spring Batch 5.0부터 설정 방식이 변경되었다.
+설정 방식 변화 Spring Batch 5.0부터 설정 방식이 변경되었다.
 
 - StepBuilderFactory와 JobBuilderFactory가 Deprecated 처리
 - 직접 JobRepository와 PlatformTransactionManager를 주입하는 방식으로 변경
 
-배치 활성화 및 자동 설정
-@SpringBootApplication 클래스에 @EnableBatchProcessing 어노테이션을 적용하면 다음 4개의 설정 클래스가 자동으로 실행된다.
+배치 활성화 및 자동 설정 @SpringBootApplication 클래스에 @EnableBatchProcessing 어노테이션을 적용하면 다음 4개의 설정 클래스가 자동으로 실행된다.
 
 1) BatchAutoConfiguration
 
@@ -59,8 +57,7 @@ Spring Batch 5.0부터 설정 방식이 변경되었다.
 
 ![](https://velog.velcdn.com/images/letsmake/post/7592bdd6-aa83-43e9-a664-2e2e9b67fc54/image.png)
 
-Job Object는 간단해 보일 수 있지만 많은 configuration option들을 알고 있어야하고, 작업을 실행할 수 있는 방법과 해당 실행중에 메타 데이터를 저장할 수 있는 방법에 대한 많은 옵션을
-고려해야한다.
+Job Object는 간단해 보일 수 있지만 많은 configuration option들을 알고 있어야하고, 작업을 실행할 수 있는 방법과 해당 실행중에 메타 데이터를 저장할 수 있는 방법에 대한 많은 옵션을 고려해야한다.
 
 사용예시)
 
@@ -104,10 +101,10 @@ JobBuilder를 통해 validatoin configurtion을 지원한다.
 
 ### 용어를 배워보자
 
-- Job: 배치 작업의 최상위 단위, 여러개의 Step으로 구성됨, 배치 작업의 실행 상태를 관리하기 위해 **`JobRepository`**에 메타데이터를 저장하며, 재시작 가능성(restartability)을
-  지원
-- Step: Job안에서 실행되는 하나의 작업 단위, Chunk기반 또는 Tasklet기반으로 구현됨, 각 Step은 고유한 트랜잭션 경계를 가질 수 있다.
-  Step 간에 데이터를 공유하려면 **`ExecutionContext`**를 사용할 수 있다.
+- Job: 배치 작업의 최상위 단위, 여러개의 Step으로 구성됨, 배치 작업의 실행 상태를 관리하기 위해 **
+  `JobRepository`**에 메타데이터를 저장하며, 재시작 가능성(restartability)을 지원
+- Step: Job안에서 실행되는 하나의 작업 단위, Chunk기반 또는 Tasklet기반으로 구현됨, 각 Step은 고유한 트랜잭션 경계를 가질 수 있다. Step 간에 데이터를 공유하려면 **
+  `ExecutionContext`**를 사용할 수 있다.
 - Tasklet: 단일작업을 수행하는 코드 블록. 데이터 읽기, 처리, 저장을 한번에 수행
 - Chunk Processing: 데이터를 일정 개수(청크 단위)로 읽고 처리한 후, 한번의 트랜잭션으로 커밋하는 방식
 - ItemReader: 외부 API 파일, DB 등에서 데이터를 읽어오는 역할을 한다. → RestTemplate, WebClient 등을 사용해 데이터를 받아오는 부분 담당

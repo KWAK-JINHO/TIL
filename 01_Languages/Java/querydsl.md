@@ -6,8 +6,7 @@ SQL 형식의 쿼리를 Type Safe하게 생성할 수 있도록 하는 라이브
 
 # Qclass
 
-엔티티 클래스 속성과 구조를 설명해주는 메타데이터.
-Type Safe하게 쿼리 조건 설정 가능
+엔티티 클래스 속성과 구조를 설명해주는 메타데이터. Type Safe하게 쿼리 조건 설정 가능
 
 ### QClass 생성 위치 지정
 
@@ -50,7 +49,6 @@ Querydsl이 JPA의 EntityManager를 사용해 쿼리를 실행할 수 있도록 
     3. Final Repository: MemberRepository extends JpaRepository, MemberRepositoryCustom
 
   이러한 기존의 방식은 파일 개수가 늘어나 관리 포인트가 많다. 하지만 JPAQueryFactory를 빈으로 등록해두었다면 굳이 인터페이스 상속구조를 따를 필요가 없다.
-
 
 - 상속 없는 레포지토리 권장방식 예시
 
@@ -152,14 +150,12 @@ builder.and(member.status.eq(status));
 
 ### BooleanExpression
 
-Private 메서드로 만들어 Where()절에 (,)로 나열하면 AND로 동작해 자동으로 null을 무시한다.
-모든 조건이 null이 되면 테이블 전체 스캔을할 가능성이 있다. 때문에 해당경우에 대해서 추가 처리가 필요.
+Private 메서드로 만들어 Where()절에 (,)로 나열하면 AND로 동작해 자동으로 null을 무시한다. 모든 조건이 null이 되면 테이블 전체 스캔을할 가능성이 있다. 때문에 해당경우에 대해서 추가 처리가 필요.
 (페이징 최대 결과 수 제한, 서비스 레이어에서 검색 조건의 유효성을 검증하는 방식 등)
 
 # Select절의 EXISTS 메서드
 
-EXISTS 메서드는 count(1)>0 보다 훨씬 빠르다. EXISTS는 타겟을 찾으면 종료되지만 COUNT는 타겟을 찾아도 끝까지 스캔하기 때문인데,
-querydsl의 경우에는 EXISTS를 사용하지 않고 fetchcount를 사용한다.(JPQL 표준스펙이 Select절에서의 EXISTS를 지원하지 않기 때문)
+EXISTS 메서드는 count(1)>0 보다 훨씬 빠르다. EXISTS는 타겟을 찾으면 종료되지만 COUNT는 타겟을 찾아도 끝까지 스캔하기 때문인데, querydsl의 경우에는 EXISTS를 사용하지 않고 fetchcount를 사용한다.(JPQL 표준스펙이 Select절에서의 EXISTS를 지원하지 않기 때문)
 하지만 버그가 발견되어 5.0부터 fetchcuont가 deprecated가 되어 직접 구현한다.
 
 ### 구현 예시
