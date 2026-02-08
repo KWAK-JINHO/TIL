@@ -19,10 +19,11 @@
 - [Process and Thread](00_ComputerScience/OS/process_and_thread.md)
 - [JWT](00_ComputerScience/Security/jwt.md)
 - [Web Security](00_ComputerScience/Security/web_security.md)
+
 ### 01_Languages
 
 - [JVM](01_Languages/Java/jvm)
-- [Collections Framework](01_Languages/Java/collections_framework.md)
+- [Collections Framework](01_Languages/Java/Fundamentals/collections_framework.md)
 - [GC (Garbage Collection)](01_Languages/Java/gc.md)
 - [OOP (Object-Oriented Programming)](01_Languages/Java/oop.md)
 
@@ -31,15 +32,18 @@
 - [AOP (Aspect-Oriented Programming)](02_Frameworks/Spring/AOP.md)
 - [IoC/DI (Inversion of Control/Dependency Injection)](02_Frameworks/Spring/IoC_DI.md)
 - [Spring Boot](02_Frameworks/Spring/springboot.md)
+
 ### 03_Database
 
-- [Redis](03_Database/Redis/redis.md)
+- [Redis](03_Database/Caching/redis.md)
+
 ### 04_Architecture
 
 - [Singleton Pattern](04_Architecture/DesignPattern/singleton_pattern.md)
 - [Factory Method Pattern](04_Architecture/DesignPattern/factory_method.md)
 - [Data-Centric Application Design](04_Architecture/SystemDesign/data_centric_application_design.md)
 - [Domain-Driven Design](04_Architecture/SystemDesign/domain_driven_design.md)
+
 ### 05_Infrastructure
 
 ### 06_Tools

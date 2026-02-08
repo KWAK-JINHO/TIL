@@ -1,9 +1,8 @@
-# 1. 개요
+# 개요
 
-JVM(Java Virtual Machine)은 Java 바이트코드(.class 파일)를 실행하기 위한 가상 엔진
-OS에 독립적인 실행환경을 제공(OS로부터 메모리를 할당)하며 GC(Garbage Collection)를 제공해 메모리 관리를 수행한다.
+JVM(Java Virtual Machine)은 Java 바이트코드(.class 파일)를 실행하기 위한 가상 엔진 OS에 독립적인 실행환경을 제공(OS로부터 메모리를 할당)하며 GC(Garbage Collection)를 제공해 메모리 관리를 수행한다.
 
-# 2. JVM 내부구조
+# 내부구조
 
 ## Class Loader
 
@@ -35,7 +34,7 @@ OS에 독립적인 실행환경을 제공(OS로부터 메모리를 할당)하며
 - GC(Garbage Collector): Heap영역의 미사용 객체를 자동 정리 [[ GC 추가 내용은 여기를 참고 ]](./gc)
 - JNI(Java Native method Interface): OS 고유 기능 및 외부 언어 라이브러리와의 통로
 
-# 3. 런타임 생명주기
+# 런타임 생명주기
 
 1. 빌드: javac(컴파일러)이 소스(.java)를 바이트코드(.class)로 변환.
 2. 프로세스 생성: OS가 JVM에 메모리를 할당하며 엔진 구동
