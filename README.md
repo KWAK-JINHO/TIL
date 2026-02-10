@@ -23,7 +23,7 @@
 ### 01_Languages
 
 - [JVM](01_Languages/Java/jvm)
-- [Collections Framework](01_Languages/Java/Fundamentals/collections_framework.md)
+- [Collections Framework](01_Languages/Java/collections_framework.md)
 - [GC (Garbage Collection)](01_Languages/Java/gc.md)
 - [OOP (Object-Oriented Programming)](01_Languages/Java/oop.md)
 
