@@ -4,7 +4,7 @@
 
 # Grafana
 
-<img src="../img/01.png" width="40%" height="20%"/>
+<img src="../../img/01.png" width="40%" height="20%"/>
 
 - **Virtual Users**: 부하 테스트에 참여 중인 가상 사용자 수를 보여줍니다.
     - Max, Min: 최대, 최소 동시 접속자
@@ -16,7 +16,7 @@
     - Mean : 평균횟수
     - Total: 총 횟수
 
-<img src="../img/02.png" width="40%" height="20%"/>
+<img src="../../img/02.png" width="40%" height="20%"/>
 
 - **http_req_duration (mean)**: HTTP 요청의 평균 처리 시간 - 35.24 밀리초
 - **http_req_duration (max)**: HTTP 요청의 최대 처리 시간 - 998.73 밀리초
