@@ -1,11 +1,4 @@
-# Spring Summary
 
-# Spring 애플리케이션의 기본 구조
-
-## 원격 프로그램 등록 & 연결
-
-- @Controller → Spring에게 **이 클래스가 웹 요청을 처리하는 컨트롤러임을 알림**
-- @RequestMapping(URL, method = GET/POST) → 특정 URL과 메서드를 매핑
 
 ## Spring 컨트롤러의 메서드 실행 과정
 
@@ -15,11 +8,7 @@
 - static 메서드는 **클래스 변수(CV)만 사용 가능**하므로 제한적임.
 - Spring MVC에서는 **컨트롤러를 싱글턴 빈으로 등록**하고, **톰캣이 객체를 생성하여 사용**하기 때문에 **static이 필요 없음**.
 
-## Spring 컨트롤러의 메서드는 private로 변경해도 호출 가능한가?
 
-- 가능하지만 public이 권장된다.
-- **Spring이 Reflection API를 사용하여 private 메서드라도 호출 가능하게 함.**
-- Reflection API는 **클래스의 정보를 런타임에 가져와서 조작할 수 있는 기능**을 제공함.
 
 ## **Spring MVC의 요청 처리 과정**
 
@@ -69,26 +58,7 @@ HTML 링크가 있어서 편하지만 링크가 깨지기 쉽다. 하지만 HTML
 - 바이너리 파일: 문자와 숫자 저장
 - 텍스트 파일: 문자만 저장, 숫자는 문자로 변환
 
-# Spring MVC
 
-Spring MVC는 **입력(DispatcherServlet) → 처리(Service) → 출력(View)** 흐름으로 동작함.
-
-## 입력 (DispatcherServlet)
-
-- **DispatcherServlet**은 사용자의 HTTP 요청을 받아 컨트롤러로 전달하는 역할
-
-```
-// 매개변수 처리의 진화 과정
-public void main(HttpServletRequest request) { }  // 원시적인 방식
-
-public void main(@RequestParam String year) { }  // 요청 데이터를 직접 받음
-
-public void main(@RequestParam int year, @RequestParam int month, @RequestParam int day) { }  // 여러 개의 데이터 처리
-
-public void main(@ModelAttribute MyData myData) { }  // 객체 바인딩
-```
-
-- 요청 데이터를 객체로 받을 수 있도록 발전하여, @ModelAttribute**를 이용해 편리하게 데이터 바인딩 가능**
 
 ## 처리 (Service & Model)
 
@@ -124,12 +94,7 @@ public class MyController {
 
 👉 사용자의 입력값을 @RequestParam, @ModelAttribute 등이 받고, **Model은 단순히 데이터를 View로 전달하는 역할**
 
-## **Reflection API**
 
-**런타임에 동적으로 클래스, 메서드, 필드에 접근하고 수정할 수 있음**
-
-- Spring은 **Reflection API를 활용해 빈을 생성하고, private 메서드도 호출 가능**
-- **객체지향 원칙을 훼손할 수 있으므로 꼭 필요할 때만 사용해야 함**
 
 ## ViewResolver
 
@@ -159,39 +124,7 @@ public class MyController {
 | application  | 웹 애플리케이션 전체 | 서버 종료 시   | 전역적으로 공유(보안문제 주의)         |
 |              |             |           |                           |
 
-# 요청과 응답
 
-## 클라이언트와 서버의 통신 과정
-
-1.클라이언트의 요청
-
-- 클라이언트가 HTTP 요청을 보냄
-- 요청은 서버의 8080 포트로 전달됨
-- 프로토콜 지정 (HTTP/1.1, HTTP/2, AJP 등)
-
-2.톰켓(WAS)의 요청 접수
-
-- 톰캣의 Thread Pool이 요청을 접수
-- Thread Pool: 다수의 스레드를 미리 생성하여 요청 처리를 분담
-- 들어온 HTTP 요청을 ServletRequest 객체로 변환
-
-3.요청 라우팅
-
-- URL 분석 수행
-- 적절한 서블릿으로 매핑
-- 요청 처리할 서블릿 결정
-
-📌 톰켓의 구조
-
-- Service → Engine → Host → Context → Servlet 계층 구조
-
-📌 서블릿의 처리
-
-- DispatcherServlet이 요청 수신
-- HTTP 메서드(GET/POST)에 따른 처리
-- @RequestMapping이 된 컨트롤러 메서드 호출
-- 비즈니스 로직 실행
-- 처리 결과를 클라이언트에게 반환
 
 <img src="../../02_Frameworks/img/con4.png"  width="70%" height="20%"/>
 
@@ -235,137 +168,8 @@ year=2021&month=10&day=1 이렇게 되어 있을때
 
 - **HTTP 본문(JSON 등)을 객체로 변환**하는 역할을 하며, WebDataBinder 대신 HttpMessageConverter를 사용
 
-# 서블릿
 
-## Servlet
 
-- 서블릿은 Java 기반으로 웹 요청(HTTP)을 처리하기 위해 만들어진 자바 클래스
-- Servlet API를 통해 웹 컨테이너(톰켓)상에서 동작하며, HTTP요청을받아 필요한 비즈니스 로직을 수행하고 결과를 HTTP 응답의 형태로 되돌려주는 역할을 한다.
-- 서블릿은 싱글톤으로 관리되며, 최초 요청 시 생성된다.(싱글톤 구조이기 때문에 요청이 많아도 새로운 인스턴스 만들지 않는다. )
-
-### Servlet의 life Cycle
-
-2. 클라이언트의 요청
-3. 톰켓이 Servlet Context에서 서블릿 객체가 존재하는지 확인
-4. 없다면 Servlet 클래스를 로딩 -> init() -> service() / 있다면 바로 service()
-5. 클라이언트에게 응답 반환
-
-### 서블릿은 싱글톤이지만 멀티스레드를 지원한다!
-
-- 서블릿내에 인스턴스 변수가 없기 때문에 싱글톤이여도 괜찮음. 전부 로컬변수 이기 때문에.
-
-참고내용)
-👉DispatcherServlet: 내부적으로 HttpServlet을 상속받은 서블릿. 👉Servlet-Context: 서블릿 컨테이너의 전역 설정과 데이터 저장을 담당하는 객체
-
-## 서블릿 URL 매핑 및 등록 방식 정리
-
-### **URL 매핑 방식 (@WebServlet)**
-
-1. exact mapping : 특정 URL과 정확히 일치해야 서블릿이 실행된다.
-2. path mapping :  특정 패턴을 포함하는 URL과 매핑 가능 ( / * 사용 )
-3. extension mapping : 특정 확장자를 가진 URL과 매핑 ( * .do -> test.do 등의 URL 처리)
-4. 디폴트: 모든 요청을 특정 서블릿으로 전달하는 매핑 ( / * : 모든 요청을 이 서블릿에서 처리)
-
-## JSP
-
-자바 서버 페이지(HTML안에 자바 코드가 있다) = 서블릿(자바 코드 안에 HTML)으로 자동으로 변환된다
-
-- JSP페이지는 따로 맵핑해줄 필요가 없다. 자동으로 맵핑됨
-- JSP페이지 호출만 해주면 된다.
-
-    - 데이터 접근 계층 (Persistence Layer)
-
-# 페이지의 이동
-
-## Redirect
-
-![[스크린샷 2025-02-13 오전 10.22.49.png]]
-
-- 새로운 URL로 재요청(요청 2번, 응답 1번)
-- 요청을 Web Browser에게 전달하여 새로 요청하게 만든다. 두번의 통신으로 속도 저하.
-- request에 데이터 저장 불가
-  ![[스크린샷 2025-02-13 오전 10.24.11.png]]
-- 사진 처럼 다른 서버로의 요청도 가능
-
-## Forward
-
-![[스크린샷 2025-02-13 오전 10.21.38.png]]
-
-- 서버 내부에서 페이지 전환(요청 1번, 응답 1번)
-- 페이지 이동 없이 WAS 내부에서 다른 리소스를 호출하기 때문에 Redirect보다 빠르다.
-- request에 데이터 저장 가능
-
-# 쿠키와 세션
-
-#쿠키 #세션
-
-## 쿠키(Cookie)
-
-- 사용자 식별 정보
-- name-value 쌍 (ASCII 문자만 가능)
-- 경로, 도메인, 유효기간 지정
-- 브라우저에 저장
-- 주요 용도: 팝업 처리, 사용자 식별
-
-"세션은 지문인식이라서 쿠키를 들고가면 서버에서 인증 가능" 하다고 생각하면된다.
-![[스크린샷 2024-12-02 오전 10.50.22.png]]
-브라우저에서 볼 수 있는 이것들은 전부 쿠키임 위에쿠키는 세션의ID이고 아래쿠키는 로그인 정보(id, pwd)를 담고 있다
-
-### 쿠키 처리 흐름
-
-1. 서버에서 쿠키 생성 후 클라이언트(브라우저)에 저장한다.
-2. 클라이언트가 서버로 요청 시 쿠키를 전달한다.
-3. 서버는 쿠키 값을 이용해 사용자 식별 및 처리진행
-
-## 세션(Session)
-
-- 브라우저별 개별 저장소를 서버에 제공
-- 관련 요청들을 하나의 묶음으로 관리
-- 서버에 데이터 저장(Map의 형태)
-- 요청과 응답이 1:1관계를 유지
-- 서버 부담이 크므로 최소한으로 사용하기를 권장한다.
-
-### 세션 처리
-
-```java
-// 세션 획득
-HttpSession session = request.getSession();
-
-// Spring MVC에서는 직접 파라미터로 받기 가능
-public String method(HttpSession session) {
-}
-```
-
-### 세션 종료
-
-1. 수동 종료: invalidate() 호출
-2. 자동 종료: 설정된 시간 경과
-
-## 쿠키와 세션의 사용
-
-### 쿠키만 사용하는 경우
-
-- 사용자 선호 설정(다크 모드)
-- 방문 기록 추적
-- "다시 보지 않기"팝업 설정
-
-### 세션만 사용하는 경우
-
-- 민감한 사용자 정보 관리
-- 임시 데이터 저장
-- 보안이 중요한 결제 시스템
-
-### 쿠키와 세션의 조합
-
-쿠키와 세션을 함께 사용하는 경우
-
-- 로그인 시스템: 세션 ID를 쿠키에 저장하고, 사용자 정보는 서버 세션에 저장
-- 장바구니 기능:
-    - 비로그인 사용자: 쿠키에 저장
-    - 로그인 사용자: 세션에 저장
-- 사용자 설정:
-    - 테마, 언어 선호도 -> 쿠키 저장
-    - 개인정보 -> 세션 저장
 
 # DAO와 Repository
 
@@ -452,38 +256,6 @@ spring은 IoC를 DI로 지원한다
     - 설정파일
     - 생성자
     - setter -> 이젠 안쓰임 📌 getBean을 할 때 해당 클래스에 생성정보를 토대로 클래스를 가지고 올 때 만약ApplicationContext에 이미 있으면 바로 쓰고 없으면 위 1번에서의 정보(범위, 어떤게 필요한지)를 토대로 생성한다.
-
-# Filter (코드 중복과 관리)
-
-전처리부분과 후처리 부분을 앞으로 뺀다(Frilter로) -> 코드가 간결해진다. AOP개념이 이와 유사하다.
-
-### Filter가 여러개일 때
-
-요청 -> Filter1 / 전처리하고 -> Filter2 / 전처리 후 서블릿 호출 -> 서블릿 처리 -> Filter2 후처리 -> Filter1 후처리
-
-요청과 응답을 처리하는데 사용되는 Java 클래스 서블릿, JSP로 가기 전에 요청을 가로채거나 응답이 클라이언트로 전달되기 전에 데이터를 수정, 로깅, 인코딩, 인증, 권한체크 하는데 사용
-
-** 스프링 시큐리티가 이걸 활용한다. **
-
-# AOP (Aspect Oriented Programming)
-
-## AOP (Aspect-Oriented Programming)란?
-
-- **서로 다른 모듈, 계층에서 공통적으로 쓰이는 부분을 분리하여 적용하는 프로그래밍 기법**
-- **핵심 기능(target) 외의 부가 기능(advice 등)을 동적으로 추가** (직접 삽입하는 것이 아니라 “남이 넣어줌”)
-- **메서드의 시작 또는 끝에 자동으로 코드(advice, 부가 기능)를 추가하는 기술**
-
-즉, 공통 기능을 분리하여 동적으로 적용할 수 있도록 하는 것이 AOP
-
-## AOP의 동작 방식
-
-- Target 객체(핵심 로직)과 Advice 객체(부가 기능)를 분리하여 관리
-- 실행 중(runtime)에 이 두 객체를 합쳐주는 역할을 하는 것이 Proxy
-- AOP는 **Proxy 객체를 생성하여 target 메서드 실행 전후에 부가 기능을 삽입
-
-## AOP의 활용
-
-- 로깅, 인증, 트랜잭션 관리 등을 비즈니스 로직과 분리하여 비즈니스 로직(Service Layer)만 집중하도록 설계 가능
 
 # 트랜잭션
 
